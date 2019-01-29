@@ -1,24 +1,29 @@
 import React from "react";
+import * as types from "../../constants/formGroupTypes";
 import { Col, FormGroup, Label, Input } from "reactstrap";
 
 class Attributes extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {  }
-        this.handleAttributes = this.handleAttributes.bind(this);
-    }
+  constructor(props) {
+    super(props);
+    this.state = {
+     ...props.attributes
+    };
+    this.handleAttributes = this.handleAttributes.bind(this);
+  }
 
-  handleAttributes (event) {
+  handleAttributes(event) {
     const name = event.target.name;
     const value = Number(event.target.value);
-    this.props.listener({
-            [name] : value
-    })
+    this.props.listener(name,value,types.ATTRIBUTES);
+  }
+
+  componentDidMount() {
+    this.setState(this.props.attributes)
   }
 
   render() {
     return (
-      <Col md="6">
+      <div>
         <h4> Attribute Modifiers</h4>
         <FormGroup>
           <Label for="str">Strength</Label>
@@ -70,7 +75,7 @@ class Attributes extends React.Component {
             onChange={this.handleAttributes}
           />
         </FormGroup>
-      </Col>
+      </div>
     );
   }
 }
