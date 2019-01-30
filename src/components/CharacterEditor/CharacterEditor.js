@@ -15,8 +15,8 @@ import {
 } from "reactstrap";
 import classnames from "classnames";
 import * as types from "../../constants/formGroupTypes";
-import {formGroupListener} from '../../utils/utils';
 import Attributes from "../FormGroups/Attributes";
+import CharacterInformation from "../FormGroups/CharacterInformation";
 
 class CharacterEditor extends React.Component {
   constructor(props) {
@@ -25,38 +25,38 @@ class CharacterEditor extends React.Component {
       ...props,
       activeTab: "1"
     };
-    // this.formGroupListener = this.formGroupListener.bind(this);
+    this.formGroupListener = this.formGroupListener.bind(this);
     this.toggleTab = this.toggleTab.bind(this);
-    this.onFormChange = this.onFormChange.bind(this)
   }
 
-  // formGroupListener(name, value, type) {
-  //   switch (type) {
-  //     case types.ATTRIBUTES:
-  //       this.setState({
-  //         attributes: { ...this.state.attributes, [name]: value }
-  //       });
-  //       break;
-  //     case types.STATS:
-  //       this.setState({
-  //         stats: { ...this.state.stats, [name]: value }
-  //       });
-  //       break;
-  //     default:
-  //       this.setState({ [name]: value });
-  //   }
-  // }
-
-  onFormChange(name,value,type){
-    const updated = formGroupListener(name,value,type,this.state);
-    this.setState({ updated });
+  // TODO: Extract this to util so it can be reused easily, difficulties with passing an object back without knowing the object structure
+  formGroupListener(name, value, type) {
+    switch (type) {
+      case types.ATTRIBUTES:
+        this.setState({
+          attributes: { ...this.state.attributes, [name]: value }
+        });
+        break;
+      case types.STATS:
+        this.setState({
+          stats: { ...this.state.stats, [name]: value }
+        });
+        break;
+      default:
+        this.setState({ [name]: value });
+    }
   }
+
   toggleTab(tab) {
     if (this.state.activeTab !== tab) {
       this.setState({
         activeTab: tab
       });
     }
+  }
+
+  componentDidUpdate () {
+    console.log(this.state)
   }
 
   render() {
@@ -87,14 +87,15 @@ class CharacterEditor extends React.Component {
         <TabContent activeTab={this.state.activeTab}>
           <TabPane tabId="1">
             <Row>
-              <h3>{this.props.characterName}</h3>
-              <h5>{this.props.playerName}</h5>
+              <Col sm="12">
+                <CharacterInformation listener={this.formGroupListener} />
+              </Col>
             </Row>
           </TabPane>
           <TabPane tabId="2">
             <Row>
               <Col sm="6">
-                <Attributes {...this.props} listener={this.onFormChange} />
+                <Attributes {...this.props} listener={this.formGroupListener} />
               </Col>
             </Row>
           </TabPane>

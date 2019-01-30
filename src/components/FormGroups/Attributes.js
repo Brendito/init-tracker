@@ -5,9 +5,6 @@ import { Col, FormGroup, Label, Input } from "reactstrap";
 class Attributes extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-     ...props.attributes
-    };
     this.handleAttributes = this.handleAttributes.bind(this);
   }
 
@@ -15,10 +12,6 @@ class Attributes extends React.Component {
     const name = event.target.name;
     const value = Number(event.target.value);
     this.props.listener(name,value,types.ATTRIBUTES);
-  }
-
-  componentDidMount() {
-    this.setState(this.props.attributes)
   }
 
   render() {
