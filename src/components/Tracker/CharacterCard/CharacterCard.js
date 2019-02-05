@@ -13,6 +13,7 @@ import {
 import * as styles from "./CharacterCard.css";
 import {Modal} from "reactstrap";
 import CharacterEditor from "../../CharacterEditor/CharacterEditor";
+import HealthBar from "./HealthBar/HealthBar";
 
 class CharacterCard extends React.Component {
   constructor(props) {
@@ -29,14 +30,11 @@ class CharacterCard extends React.Component {
   render() {
     return (
       <Col sm="4">
-        <Card className={styles.CharacterCard}>
+        <Card className={styles.CharacterCard} onClick={this.toggleEditor}>
           <CardBody>
             <CardTitle>{this.props.characterName}</CardTitle>
-            <CardSubtitle>{this.props.characterName}</CardSubtitle>
-            <CardText>
-              Some quick CharacterCard text to build on the card title and make
-              up the bulk of the card's content.
-            </CardText>
+            <CardSubtitle>{this.props.playerName}</CardSubtitle>
+            <HealthBar {...this.props}/>
             <Button onClick={this.toggleEditor}>Edit</Button>
             <Button onClick={this.props.removeFromTracker}>Remove</Button>
           </CardBody>
@@ -54,7 +52,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     removeFromTracker: () =>
       dispatch({
         type: actionTypes.REMOVE_FROM_TRACKER,
-        key: ownProps.char.key
+        id: ownProps.id
       })
   };
 };

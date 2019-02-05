@@ -14,19 +14,23 @@ import {
   TabPane
 } from "reactstrap";
 import classnames from "classnames";
+import { connect } from "react-redux";
+import { editCharacter } from "../../actions/trackerActions"
 import * as types from "../../constants/formGroupTypes";
 import Attributes from "../FormGroups/Attributes";
 import CharacterInformation from "../FormGroups/CharacterInformation";
+import HealthController from "../FormGroups/HealthController";
 
 class CharacterEditor extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      ...props,
+      char: props,
       activeTab: "1"
     };
     this.formGroupListener = this.formGroupListener.bind(this);
     this.toggleTab = this.toggleTab.bind(this);
+    this.submitEdit = this.submitEdit.bind(this);
   }
 
   // TODO: Extract this to util so it can be reused easily, difficulties with passing an object back without knowing the object structure
@@ -34,17 +38,28 @@ class CharacterEditor extends React.Component {
     switch (type) {
       case types.ATTRIBUTES:
         this.setState({
-          attributes: { ...this.state.attributes, [name]: value }
+          char: {
+            ...this.state.char,
+            attributes: { ...this.state.char.attributes, [name]: value }
+          }
         });
         break;
       case types.STATS:
         this.setState({
-          stats: { ...this.state.stats, [name]: value }
+          char: {
+            ...this.state.char,
+            stats: { ...this.state.char.stats, [name]: value }
+          }
         });
         break;
       default:
-        this.setState({ [name]: value });
+        this.setState({ char: { ...this.state.char, [name]: value } });
     }
+  }
+
+  submitEdit() {
+    this.props.editCharacter(this.state.char);
+    this.props.closeModal();
   }
 
   toggleTab(tab) {
@@ -53,10 +68,6 @@ class CharacterEditor extends React.Component {
         activeTab: tab
       });
     }
-  }
-
-  componentDidUpdate () {
-    console.log(this.state)
   }
 
   render() {
@@ -89,6 +100,7 @@ class CharacterEditor extends React.Component {
             <Row>
               <Col sm="12">
                 <CharacterInformation listener={this.formGroupListener} />
+                <HealthController listener={this.formGroupListener} {...this.state.char} />
               </Col>
             </Row>
           </TabPane>
@@ -100,9 +112,10 @@ class CharacterEditor extends React.Component {
             </Row>
           </TabPane>
         </TabContent>
+        <Button color="primary" onClick={this.submitEdit}></Button>
       </div>
     );
   }
 }
 
-export default CharacterEditor;
+export default connect(null, { editCharacter })(CharacterEditor);

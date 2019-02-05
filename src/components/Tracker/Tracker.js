@@ -9,7 +9,7 @@ class Tracker extends Component {
       <div>
         <Row>
           {this.props.list.map(char => {
-            return <CharacterCard key={char.key} {...char} />;
+            return <CharacterCard key={char.id} {...char} />;
           })}
         </Row>
       </div>
