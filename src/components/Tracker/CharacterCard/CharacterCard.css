@@ -10,5 +10,10 @@
 #acIcon span {
     position: absolute;
     top: 35px;
-    right: 36px;
+    right: 37px;
+}
+
+.characterIcon img {
+    height: 50px;
+    width: 50px;
 }

@@ -4,19 +4,17 @@ import * as actionTypes from "../../../constants/actionTypes";
 import {
   Card,
   Col,
-  CardText,
   CardBody,
   CardTitle,
   CardSubtitle,
   Badge
 } from "reactstrap";
-import * as styles from "./CharacterCard.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import "./CharacterCard.css";
 import { Modal } from "reactstrap";
 import CharacterEditor from "../../CharacterEditor/CharacterEditor";
 import HealthBar from "./HealthBar/HealthBar";
-import * as types from '../../../constants/characterClasses';
-import {Wizard, Rogue} from '../../../assets/classes/classes';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { handleCharacterIcon } from "../../../utils/characterIconUtil";
 import AC from "../../../assets/icons/AC";
 
 class CharacterCard extends React.Component {
@@ -26,33 +24,25 @@ class CharacterCard extends React.Component {
       editorIsOpen: false
     };
     this.toggleEditor = this.toggleEditor.bind(this);
-    this.handleClassIcon = this.handleClassIcon.bind(this);
   }
 
   toggleEditor() {
     this.setState({ editorIsOpen: !this.state.editorIsOpen });
   }
-
-  // Make Util
-  handleClassIcon() {
-    const charClass = this.props.characterClass;
-    switch (charClass) {
-      case types.WIZARD:
-        return (<Wizard/>);
-      default:
-        return (<Rogue/>);
-    }
-  }
   render() {
     return (
       <Col sm="6" md="4">
-        <Card className={styles.CharacterCard} >
+        <Card>
           <CardBody>
             <div className="d-flex justify-content-between mb-2">
-              <div>{this.handleClassIcon()}</div>
-              <div className="d-flex flex-column">
-                <CardTitle>{this.props.characterName}</CardTitle>
-                <CardSubtitle>{this.props.playerName}</CardSubtitle>
+              <div className="d-flex">
+                <div className="characterIcon">
+                  {handleCharacterIcon(this.props.characterClass)}
+                </div>
+                <div className="d-flex flex-column">
+                  <CardTitle>{this.props.characterName}</CardTitle>
+                  <CardSubtitle>{this.props.playerName}</CardSubtitle>
+                </div>
               </div>
               <AC id="acIcon" ac={this.props.stats.ac} />
             </div>
@@ -62,8 +52,15 @@ class CharacterCard extends React.Component {
               <Badge color="secondary">Reaction Used</Badge>
             </div>
             <div className="float-right">
-              <FontAwesomeIcon className="mr-2" icon="edit" onClick={this.toggleEditor} />
-              <FontAwesomeIcon icon="times" onClick={this.props.removeFromTracker} />
+              <FontAwesomeIcon
+                className="mr-2"
+                icon="edit"
+                onClick={this.toggleEditor}
+              />
+              <FontAwesomeIcon
+                icon="times"
+                onClick={this.props.removeFromTracker}
+              />
             </div>
           </CardBody>
         </Card>

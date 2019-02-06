@@ -7,11 +7,11 @@ class CharacterForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      characterName: "Bartholamew Brave",
-      playerName: "Brendan",
+      characterName: "Scanlan Shorthalt",
+      playerName: "Sam Riegel",
       characterType: "PC",
-      characterRace: "Human",
-      characterClass: "Wizard",
+      characterRace: "Halfling",
+      characterClass: "Bard",
       mini: "Red",
       attributes: {
         str: 3,
@@ -156,9 +156,19 @@ class CharacterForm extends Component {
                       name="characterClass"
                       id="characterClass"
                     >
-                      <option value={types.WIZARD}>Wizard</option>
+                      <option value={types.BARBARIAN}>Barbarian</option>
+                      <option value={types.BARD}>Bard</option>
+                      <option value={types.CLERIC}>Cleric</option>
+                      <option value={types.DRUID}>Druid</option>
                       <option value={types.FIGHTER}>Fighter</option>
+                      <option value={types.MONK}>Monk</option>
+                      <option value={types.PALADIN}>Paladin</option>
+                      <option value={types.RANGER}>Ranger</option>
                       <option value={types.ROGUE}>Rogue</option>
+                      <option value={types.SORCERER}>Sorcerer</option>
+                      <option value={types.WARLOCK}>Warlock</option>
+                      <option value={types.WIZARD}>Wizard</option>
+                      
                     </Input>
                   </FormGroup>
                   <FormGroup>
