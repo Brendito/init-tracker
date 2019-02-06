@@ -7,7 +7,7 @@ class Tracker extends Component {
   render() {
     return (
       <div>
-        <Row>
+        <Row className="p-3">
           {this.props.list.map(char => {
             return <CharacterCard key={char.id} {...char} />;
           })}

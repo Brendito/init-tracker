@@ -1,3 +1,19 @@
 .charCard {
     color: black;
 }
+
+#acIcon img {
+    height: 60px;
+    width: 50px;
+}
+
+#acIcon span {
+    position: absolute;
+    top: 35px;
+    right: 37px;
+}
+
+.characterIcon img {
+    height: 50px;
+    width: 50px;
+}
