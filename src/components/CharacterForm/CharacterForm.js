@@ -1,28 +1,30 @@
 import React, { Component } from "react";
 import { Form, FormGroup, Label, Input, Button, Row, Col } from "reactstrap";
+import * as types from '../../constants/characterClasses';
 
 
 class CharacterForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      characterName: "",
-      playerName: "",
+      characterName: "Bartholamew Brave",
+      playerName: "Brendan",
       characterType: "PC",
-      characterRace: "",
-      mini: "",
+      characterRace: "Human",
+      characterClass: "Wizard",
+      mini: "Red",
       attributes: {
-        str: 0,
-        dex: 0,
-        int: 0,
-        wis: 0,
-        con: 0,
-        cha: 0
+        str: 3,
+        dex: 2,
+        int: 1,
+        wis: 5,
+        con: 2,
+        cha: 1
       },
       stats: {
-        maxHP: 0,
-        currentHP: 0,
-        ac: 0,
+        maxHP: 45,
+        currentHP: 45,
+        ac: 15,
         init: {
           initMod: 0,
           initRoll: 0,
@@ -65,13 +67,13 @@ class CharacterForm extends Component {
           }
         }
       });
-    } else if(event.target.name === 'maxHP') {
+    } else if (event.target.name === 'maxHP') {
       let currentHP = value;
       this.setState({
         stats: {
           ...this.state.stats,
-          [name] : value,
-          currentHP : currentHP
+          [name]: value,
+          currentHP: currentHP
         }
       })
     } else {
@@ -90,7 +92,7 @@ class CharacterForm extends Component {
     this.setState({
       attributes: {
         ...this.state.attributes,
-        [name] : value
+        [name]: value
       }
     })
   }
@@ -146,6 +148,18 @@ class CharacterForm extends Component {
                       placeholder=""
                       onChange={this.handleChange}
                     />
+                  </FormGroup>
+                  <FormGroup>
+                    <Input
+                      onChange={this.handleChange}
+                      type="select"
+                      name="characterClass"
+                      id="characterClass"
+                    >
+                      <option value={types.WIZARD}>Wizard</option>
+                      <option value={types.FIGHTER}>Fighter</option>
+                      <option value={types.ROGUE}>Rogue</option>
+                    </Input>
                   </FormGroup>
                   <FormGroup>
                     <Label for="mini">Mini</Label>
