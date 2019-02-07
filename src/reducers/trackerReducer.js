@@ -1,5 +1,4 @@
 import * as types from "../constants/actionTypes";
-import { v4 } from 'node-uuid';
 
 const initialState = {
   list: []

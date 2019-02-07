@@ -1,14 +1,25 @@
 import React, { Component } from "react";
-import { Container, Jumbotron } from "reactstrap";
+import {connect} from 'react-redux'
+import {
+  Container,
+  Jumbotron
+} from "reactstrap";
+
+
 class CampaignManager extends Component {
-  state = {};
   render() {
     return (
       <Container>
         <Jumbotron>Campaign Manager</Jumbotron>
+        <h3>List Campaigns Here</h3>
+
       </Container>
     );
   }
 }
 
-export default CampaignManager;
+const mapStateToProps = (state) => {
+    return {campaigns: state.savedCampaigns}
+}
+
+export default connect(mapStateToProps)(CampaignManager);

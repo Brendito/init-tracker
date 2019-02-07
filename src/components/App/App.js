@@ -9,6 +9,7 @@ import { faEdit, faTimes } from "@fortawesome/free-solid-svg-icons";
 import * as paths from "../../constants/routes";
 import LandingPage from "../../pages/LandingPage";
 import CampaignManager from "../../pages/CampaignManager";
+import CampaignBuilder from "../CampaignBuilder/CampaignBuilder";
 
 library.add(faEdit, faTimes);
 
@@ -16,11 +17,10 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <AddCharacterForm />
-        <Tracker />
         <Switch>
           <Route exact path="/" component={LandingPage} />
           <Route path={paths.CAMPAIGN_MANAGER} component={CampaignManager} />
+          <Route path={paths.CAMPAIGN_BUILDER} component={CampaignBuilder} />
         </Switch>
       </div>
     );

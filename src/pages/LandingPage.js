@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Container, Jumbotron, Button } from "reactstrap";
+import * as paths from '../constants/routes'
+import { Container, Jumbotron, Button, ListGroup, ListGroupItem } from "reactstrap";
 import {Link} from 'react-router-dom';      
 
 
@@ -9,7 +10,7 @@ class LandingPage extends Component {
     return (
       <Container>
         <Jumbotron>Init Tracker</Jumbotron>
-        <Link to="/campaignmanager"><Button>Check it</Button></Link>
+        <Link to={paths.CAMPAIGN_BUILDER}><Button>Create New Campaign</Button></Link>
       </Container>
     );
   }
