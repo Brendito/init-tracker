@@ -10,3 +10,7 @@ export const removeFromTracker = key => ({
   key
 })
 
+export const editCharacter = char => ({
+  type: types.EDIT_CHARACTER,
+  char
+})

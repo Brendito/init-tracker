@@ -1,15 +1,15 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import CharCard from "./CharCard/CharCard";
+import CharacterCard from "./CharacterCard/CharacterCard";
 import { Row } from "reactstrap";
 
 class Tracker extends Component {
   render() {
     return (
       <div>
-        <Row>
+        <Row className="p-3">
           {this.props.list.map(char => {
-            return <CharCard key={char.key} char={char} />;
+            return <CharacterCard key={char.id} {...char} />;
           })}
         </Row>
       </div>
