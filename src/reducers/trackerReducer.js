@@ -1,4 +1,5 @@
 import * as types from "../constants/actionTypes";
+import { v4 } from 'node-uuid';
 
 const initialState = {
   list: []
@@ -7,8 +8,7 @@ export const tracker = (state = initialState, action) => {
   switch (action.type) {
     case types.ADD_TO_TRACKER:
       // TODO: Edge case when adding character with same information
-      let list = [...state.list];
-      action.char.id = list.length + 1;
+      // action.char.id = v4();
       return {
         ...state,
         list: [...state.list, action.char]
