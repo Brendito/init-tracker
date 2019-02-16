@@ -1,36 +1,31 @@
 import React, { Component } from "react";
-import {connect} from 'react-redux'
-import {
-  Container,
-  Jumbotron,
-  Form,
-  FormGroup,
-  Input,
-  Button,
-  Label
-} from "reactstrap";
-
+import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
+import { Container, Row, Col, Jumbotron, Button } from "reactstrap";
+import CharacterList from "../CharacterList/CharacterList";
+import { saveCampaign } from "../../actions/campaignActions";
+import * as charTypes from "../../constants/characterTypes";
+import "./style.css";
 
 class CampaignBuilder extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      campaignName : "",
-      id: 0,
-      encounters: [
-        {
-          name: "",
-          id: 0,
-          list: []
-        }
-      ],
-      characters: {
-        players: [],
-        npcs: [],
-        enemies: []
-      }
+      formContext: "",
+      characterAddModalIsOpen: false,
+      campaign: { ...this.props.campaign }
     };
     this.handleChange = this.handleChange.bind(this);
+    this.handleSave = this.handleSave.bind(this);
+  }
+
+  componentWillReceiveProps() {
+    this.forceUpdate();
+  }
+
+  handleSave(event) {
+    event.preventDefault();
+    this.props.saveCampaign(this.props.campaign);
   }
 
   handleChange(event) {
@@ -39,34 +34,53 @@ class CampaignBuilder extends Component {
       target.type === "number" ? Number(target.value) : target.value;
     const name = target.name;
     this.setState({
-      [name]: value
+      campaign: { ...this.state.campaign, [name]: value }
     });
   }
 
   render() {
+    if (this.props.campaign === null) {
+      return <Redirect to="/" />;
+    }
     return (
       <Container>
-        <Jumbotron>Campaign Builder</Jumbotron>
-        <h4>Create a New Campaign</h4>
-        <Form>
-          <FormGroup>
-            <Label for="campaignName">Campaign Name</Label>
-            <Input
-              type="text"
-              name="campaignName"
-              id="campaignName"
-              placeholder=""
-              onChange={this.handleChange}
+        <Jumbotron>{this.props.campaign.campaignName}</Jumbotron>
+        <Row>
+          <Col md="4">
+            <CharacterList
+              characterType={charTypes.PC}
+              charList={this.props.campaign.characters.players}
             />
-          </FormGroup>
-        </Form>
+          </Col>
+          <Col md="4">
+            <CharacterList
+              characterType={charTypes.NPC}
+              charList={this.props.campaign.characters.npcs}
+            />
+          </Col>
+          <Col md="4">
+            <CharacterList
+              characterType={charTypes.ENEMY}
+              charList={this.props.campaign.characters.enemies}
+            />
+          </Col>
+        </Row>
+        <Button className="mt-3" onClick={this.handleSave}>Save Changes to Campaign </Button>
       </Container>
     );
   }
 }
+const mapStateToProps = state => {
+  return { campaign: state.campaign.loadedCampaign };
+};
 
-const mapStateToProps = (state) => {
-    
-}
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    saveCampaign: campaign => dispatch(saveCampaign(campaign))
+  };
+};
 
-export default connect()(CampaignBuilder);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CampaignBuilder);

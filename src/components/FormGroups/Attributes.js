@@ -1,6 +1,6 @@
 import React from "react";
 import * as types from "../../constants/formGroupTypes";
-import { Col, FormGroup, Label, Input } from "reactstrap";
+import { FormGroup, Label, Input } from "reactstrap";
 
 class Attributes extends React.Component {
   constructor(props) {
@@ -24,7 +24,7 @@ class Attributes extends React.Component {
             type="number"
             name="str"
             id="str"
-            placeholder=""
+            placeholder={this.props.str}
             onChange={this.handleAttributes}
           />
           <Label for="dex">Dexterity</Label>
@@ -32,7 +32,7 @@ class Attributes extends React.Component {
             type="number"
             name="dex"
             id="dex"
-            placeholder=""
+            placeholder={this.props.dex}
             onChange={this.handleAttributes}
           />
           <Label for="con">Constitution</Label>
@@ -40,7 +40,7 @@ class Attributes extends React.Component {
             type="number"
             name="con"
             id="con"
-            placeholder=""
+            placeholder={this.props.con}
             onChange={this.handleAttributes}
           />
           <Label for="wis">Wisdom</Label>
@@ -48,7 +48,7 @@ class Attributes extends React.Component {
             type="number"
             name="wis"
             id="wis"
-            placeholder=""
+            placeholder={this.props.wis}
             onChange={this.handleAttributes}
           />
           <Label for="int">Intellect</Label>
@@ -56,7 +56,7 @@ class Attributes extends React.Component {
             type="number"
             name="int"
             id="int"
-            placeholder=""
+            placeholder={this.props.int}
             onChange={this.handleAttributes}
           />
           <Label for="cha">Charisma</Label>
@@ -64,7 +64,7 @@ class Attributes extends React.Component {
             type="number"
             name="cha"
             id="cha"
-            placeholder=""
+            placeholder={this.props.cha}
             onChange={this.handleAttributes}
           />
         </FormGroup>
