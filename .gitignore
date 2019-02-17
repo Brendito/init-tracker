@@ -25,3 +25,5 @@ yarn-error.log*
 /assets
 
 src/state\.js
+
+/assets

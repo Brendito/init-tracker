@@ -5,14 +5,32 @@ import App from "./components/App/App";
 import * as serviceWorker from "./serviceWorker";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
-import rootReducer from './reducers/rootReducer'
+import rootReducer from "./reducers/rootReducer";
+import { BrowserRouter as Router } from "react-router-dom";
+import { loadState, saveState } from "./utils/localStorage";
+import throttle from "lodash/throttle";
 
+const persistedState = loadState();
 
-const store = createStore(rootReducer, typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()  );
+const store = createStore(
+  rootReducer,
+  persistedState,
+  typeof window !== "undefined" &&
+    window.__REDUX_DEVTOOLS_EXTENSION__ &&
+    window.__REDUX_DEVTOOLS_EXTENSION__()
+);
+
+store.subscribe(
+  throttle(() => {
+    saveState(store.getState());
+  }, 1000)
+);
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <Router>
+      <App />
+    </Router>
   </Provider>,
   document.getElementById("root")
 );
