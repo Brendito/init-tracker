@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import * as contextTypes from "../../../constants/contextTypes";
 import { handleCharacterIcon } from "../../../utils/characterIconUtil";
 import { ListGroupItem, Modal } from "reactstrap";
 import CharacterForm from "../../CharacterForm/CharacterForm";
@@ -12,9 +13,18 @@ class CharacterListCard extends Component {
   toggleEditor() {
     this.setState({ editorIsOpen: !this.state.editorIsOpen });
   }
+
+  handleClick() {
+      if(this.props.context === contextTypes.CAMPAIGN_BUILDER) {
+        this.toggleEditor();
+      } else if (this.props.context === contextTypes.ENCOUNTER_BUILDER) {
+        // DO THE OTHER STUFF
+      }
+  }
+
   render() {
     return (
-      <ListGroupItem key={this.props.id} onClick={this.toggleEditor}>
+      <ListGroupItem key={this.props.id} onClick={this.handleClick}>
         <div className="d-flex">
           <div className="characterIcon mr-2">
             {handleCharacterIcon(this.props.characterClass)}

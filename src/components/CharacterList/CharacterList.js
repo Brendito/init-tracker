@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { ListGroup, Modal, Button } from "reactstrap";
 import * as charTypes from "../../constants/characterTypes";
+import * as contextTypes from "../../constants/contextTypes";
 import CharacterListCard from "./CharacterListCard/CharacterListCard";
 import CharacterForm from "../CharacterForm/CharacterForm";
 
@@ -43,17 +44,23 @@ class CharacterList extends Component {
             this.props.charList.map(char => {
               return (
                 <CharacterListCard
-                  onCharSubmit={this.handleCharSubmit}
                   key={char.id}
+                  context={this.props.context}
                   {...char}
                 />
               );
             })}
         </ListGroup>
 
-        <Button className="mt-3" name={this.props.formContext} onClick={this.toggleCharModal}>
-          Create New {this.handleMsg()}
-        </Button>
+        {this.props.context === contextTypes.CAMPAIGN_BUILDER && (
+          <Button
+            className="mt-3"
+            name={this.props.formContext}
+            onClick={this.toggleCharModal}
+          >
+            Create New {this.handleMsg()}
+          </Button>
+        )}
 
         <Modal
           isOpen={this.state.charModalIsOpen}

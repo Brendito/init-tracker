@@ -5,6 +5,7 @@ import { Container, Row, Col, Jumbotron, Button } from "reactstrap";
 import CharacterList from "../CharacterList/CharacterList";
 import { saveCampaign } from "../../actions/campaignActions";
 import * as charTypes from "../../constants/characterTypes";
+import * as contextTypes from "../../constants/contextTypes";
 import "./style.css";
 
 class CampaignBuilder extends Component {
@@ -50,18 +51,21 @@ class CampaignBuilder extends Component {
             <CharacterList
               characterType={charTypes.PC}
               charList={this.props.campaign.characters.players}
+              context={contextTypes.CAMPAIGN_BUILDER}
             />
           </Col>
           <Col md="4">
             <CharacterList
               characterType={charTypes.NPC}
               charList={this.props.campaign.characters.npcs}
+              context={contextTypes.CAMPAIGN_BUILDER}
             />
           </Col>
           <Col md="4">
             <CharacterList
               characterType={charTypes.ENEMY}
               charList={this.props.campaign.characters.enemies}
+              context={contextTypes.CAMPAIGN_BUILDER}
             />
           </Col>
         </Row>
