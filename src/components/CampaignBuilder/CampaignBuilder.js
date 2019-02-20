@@ -3,6 +3,11 @@ import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { Container} from "reactstrap";
 import { saveCampaign } from "../../actions/campaignActions";
+<<<<<<< develop
+=======
+import * as charTypes from "../../constants/characterTypes";
+import * as contextTypes from "../../constants/contextTypes";
+>>>>>>> Initial structuring of builder
 import "./style.css";
 import NpcContainer from "../../containers/NpcContainer";
 
@@ -49,14 +54,26 @@ class CampaignBuilder extends Component {
             <CharacterList
               characterType={charTypes.PC}
               charList={this.props.campaign.characters.players}
+              context={contextTypes.CAMPAIGN_BUILDER}
             />
           </Col>
           <Col md="4">
             <CharacterList
               characterType={charTypes.NPC}
               charList={this.props.campaign.characters.npcs}
+              context={contextTypes.CAMPAIGN_BUILDER}
             />
           </Col>
+<<<<<<< develop
+=======
+          <Col md="4">
+            <CharacterList
+              characterType={charTypes.ENEMY}
+              charList={this.props.campaign.characters.enemies}
+              context={contextTypes.CAMPAIGN_BUILDER}
+            />
+          </Col>
+>>>>>>> Initial structuring of builder
         </Row>
         <Button className="mt-3" onClick={this.handleSave}>
           Save Changes to Campaign{" "}
