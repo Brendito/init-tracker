@@ -59,7 +59,7 @@ class NpcForm extends Component {
 
   render() {
     return (
-      <Container className={this.props.className}>
+      <div className={this.props.className}>
         <h4>NPC Information</h4>
         <hr />
         <Form>
@@ -332,14 +332,17 @@ class NpcForm extends Component {
             listener={this.props.onSpecialFormChange}
             onDelete={this.props.onDelete}
           />
+          <hr/>
+          <div className="d-flex justify-content-between mt-4">
           {!this.props.editingNpc ? (
             <Button onClick={this.props.handleSubmit}>Add To Campaign</Button>
           ) : (
             <Button onClick={this.props.onEditSubmit}>Save</Button>
           )}
           <Button onClick={this.props.onCancel}>Cancel</Button>
+          </div>
         </Form>
-      </Container>
+      </div>
     );
   }
 }

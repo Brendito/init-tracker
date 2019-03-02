@@ -24,3 +24,9 @@ export const saveCharToCampaign = char => ({
   type: actionTypes.SAVE_CHAR_TO_CAMPAIGN,
   char
 });
+
+export const deleteChar = (id, charType) => ({
+  type: actionTypes.DELETE_CHAR,
+  id,
+  charType
+});

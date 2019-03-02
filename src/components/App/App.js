@@ -3,12 +3,12 @@ import { Route, Switch } from "react-router-dom";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.css";
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faEdit, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faEdit, faTimes, faCopy } from "@fortawesome/free-solid-svg-icons";
 import * as paths from "../../constants/routes";
 import LandingPage from "../../pages/LandingPage";
 import CampaignBuilder from "../CampaignBuilder/CampaignBuilder";
 
-library.add(faEdit, faTimes);
+library.add(faEdit, faTimes, faCopy);
 
 class App extends Component {
   render() {

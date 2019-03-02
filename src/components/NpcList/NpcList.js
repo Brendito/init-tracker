@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   Container,
   ListGroup,
@@ -36,23 +37,27 @@ class NpcList extends Component {
   };
 
   handleLoadNpc = e => {
-    this.props.loadNpc(e.target.dataset.id);
+    const id =
+      e.target.dataset.id !== undefined
+        ? e.target.dataset.id
+        : e.target.parentNode.dataset.id;
+    this.props.loadNpc(id);
   };
 
   render() {
     return (
-      <Container className={this.props.className}>
+      <div className={this.props.className}>
         <div className="d-flex justify-content-between">
           <FormGroup>
             <Label for="searchFilter">Search</Label>
             <Input
               id="searchFilter"
               onChange={this.handleFilterChange}
-              placeholder="Search for NPC"
+              placeholder="NPC Name..."
             />
           </FormGroup>
           <FormGroup>
-            <Label for="ratingFilter">Challenge Rating</Label>
+            <Label for="ratingFilter">CR</Label>
             <Input
               id="ratingFilter"
               type="select"
@@ -65,7 +70,7 @@ class NpcList extends Component {
             </Input>
           </FormGroup>
           <FormGroup>
-            <Label for="dataFilter">Data Source</Label>
+            <Label for="dataFilter">Source</Label>
             <Input
               type="select"
               id="dataFilter"
@@ -82,27 +87,31 @@ class NpcList extends Component {
             this.props.npcs.map((npc, i) => {
               return (
                 <ListGroupItem key={i}>
-                  <div className="d-flex">
-                    <div className="d-flex flex-column">
-                      <h3>{npc.name}</h3>
-                      <h5>
+                  <div className="d-flex justify-content-between">
+                    <div className="d-flex flex-column ">
+                      <h5>{npc.name}</h5>
+                      <span>CR ({npc.challenge_rating})</span>
+                      <span>
                         {npc.size} {titleCase(npc.type)}
-                      </h5>
+                      </span>
                     </div>
-                    <p>{npc.dataType}</p>
+                    <div className="d-flex flex-column justify-content-between">
+                      <div className="text-right ">
+                        <FontAwesomeIcon
+                          icon="copy"
+                          className="mt-1"
+                          data-id={npc.id}
+                          onClick={this.handleLoadNpc}
+                        />
+                      </div>
+                      <span>{npc.dataType}</span>
+                    </div>
                   </div>
-                  <Button
-                    href="#"
-                    onClick={this.handleLoadNpc}
-                    data-id={npc.id}
-                  >
-                    Clone
-                  </Button>
                 </ListGroupItem>
               );
             })}
         </ListGroup>
-      </Container>
+      </div>
     );
   }
 }
