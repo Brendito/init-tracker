@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { saveCharToCampaign } from "../actions/campaignActions";
+import { saveCharToCampaign, saveCampaign } from "../actions/campaignActions";
 import { Container, Row, Col, Modal, Button } from "reactstrap";
 import npcData from "../assets/data/npcData";
 import NpcFormContainer from "./NpcFormContainer";
@@ -68,6 +68,7 @@ class NpcContainer extends Component {
         loadedNpc: true
       }
     });
+    window.scrollTo(0, 0);
   };
 
   resetForm = () => {
@@ -79,7 +80,7 @@ class NpcContainer extends Component {
         editingNpc: false
       }
     });
-    window.scrollTo(0, 0)
+    window.scrollTo(0, 0);
   };
 
   editNpc = id => {
@@ -100,6 +101,7 @@ class NpcContainer extends Component {
     this.setState({ char: { ...char } });
     setTimeout(() => {
       this.props.saveCharToCampaign(char);
+      this.props.saveCampaign(this.props.campaign);
       this.resetForm();
     }, 500);
   };
@@ -122,6 +124,7 @@ class NpcContainer extends Component {
     this.handleNpcType(type);
     setTimeout(() => {
       this.props.saveCharToCampaign(this.state.char);
+      this.props.saveCampaign(this.props.campaign);
       this.resetForm();
     }, 500);
     this.toggleNpcAddModal();
@@ -182,7 +185,6 @@ class NpcContainer extends Component {
               onEditSubmit={this.handleEditSubmit}
               editingNpc={this.state.app.editingNpc}
               char={this.state.char || npcs}
-
             />
             <NpcListContainer
               className={this.state.app.loadedNpc ? "hidden" : ""}
@@ -218,13 +220,19 @@ class NpcContainer extends Component {
 }
 
 const mapStateToProps = state => {
-  return { npcs: state.campaign.loadedCampaign.characters.npcs };
+  return {
+    npcs: state.campaign.loadedCampaign.characters.npcs,
+    campaign: state.campaign.loadedCampaign
+  };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     saveCharToCampaign: char => {
       dispatch(saveCharToCampaign(char));
+    },
+    saveCampaign: campaignId => {
+      dispatch(saveCampaign(campaignId));
     }
   };
 };

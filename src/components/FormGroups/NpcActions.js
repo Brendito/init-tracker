@@ -23,13 +23,9 @@ class NpcActions extends Component {
       actionDice: "",
       actionBonus: ""
     };
-    this.toggleModal = this.toggleModal.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleDelete = this.handleDelete.bind(this);
-    this.handleLoadModal = this.handleLoadModal.bind(this);
   }
 
-  toggleModal() {
+  toggleModal = () => {
     this.setState({
       actionAdd: !this.state.actionAdd,
       actionName: "",
@@ -40,7 +36,7 @@ class NpcActions extends Component {
     });
   }
 
-  handleSubmit() {
+  handleSubmit = () => {
     this.toggleModal();
     let actionName = document.getElementById("actionName").value;
     let actionDesc = document.getElementById("actionDesc").value;
@@ -63,7 +59,7 @@ class NpcActions extends Component {
     }
   }
 
-  handleLoadModal(e) {
+  handleLoadModal = (e) => {
     let name = "";
     let desc = "";
     let attackbonus = "";
@@ -93,7 +89,7 @@ class NpcActions extends Component {
     });
   }
 
-  handleDelete(e) {
+  handleDelete = (e) => {
     const name =
       e.target.parentNode.dataset.name !== undefined
         ? e.target.parentNode.dataset.name
@@ -112,12 +108,12 @@ class NpcActions extends Component {
               return (
                 <ListGroupItem key={i}>
                   <div className="d-flex flex-column align-content-center">
-                    <span className="mr-3">{action.name}</span>
+                    <span className="font-weight-bold mb-2">{action.name}</span>
                     <p>{action.desc}</p>
                   </div>
                   {action.attack_bonus !== 0 && action.damage_bonus !== null && (
-                    <div className="d-flex justify-content-between mb-3">
-                      <span>
+                    <div>
+                      <span className="mr-3">
                         <span className="font-weight-bold mr-1">
                           +{action.attack_bonus}
                         </span>
@@ -128,7 +124,7 @@ class NpcActions extends Component {
                       </span>
                     </div>
                   )}
-                  <div className="d-flex m-1">
+                  <div className="d-flex m-1 justify-content-end">
                     <FontAwesomeIcon
                       icon="edit"
                       className="m-1"

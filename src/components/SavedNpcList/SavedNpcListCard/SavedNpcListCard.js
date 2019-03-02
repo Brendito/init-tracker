@@ -9,8 +9,12 @@ class SavedNpcListCard extends Component {
   }
 
   handleEditNpc = (e) => {
-    const id = e.target.dataset.id !== undefined ? e.target.dataset.id : e.target.parentNode.dataset.id;
+    let id = e.target.dataset.id !== undefined ? e.target.dataset.id : e.target.parentNode.dataset.id;
     this.props.editNpc(id)
+  }
+  handleDelete = (e) => {
+    let id = e.target.dataset.id !== undefined ? e.target.dataset.id : e.target.parentNode.dataset.id;
+    this.props.onDelete(id, this.props.name)
   }
   render() {
     return (
@@ -27,6 +31,7 @@ class SavedNpcListCard extends Component {
             <FontAwesomeIcon
               icon="times"
               className="mt-1"
+              data-id={this.props.id}
               onClick={this.handleDelete}
             />
           </div>
