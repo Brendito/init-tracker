@@ -1,7 +1,7 @@
 export const PC = "PC";
-export const NPC = "NPC";
-export const ENEMY = "ENEMY";
+export const FRIENDLY_NPC = "FRIENDLY_NPC";
+export const HOSTILE_NPC = "HOSTILE_NPC";
 
 export const PC_MSG = "Player Character";
-export const NPC_MSG = "Non-Player Character";
-export const ENEMY_MSG = "Enemy Character";
+export const FRIENDLY_NPC_MSG = "Friendly Non-Player Character";
+export const HOSTILE_NPC_MSG = "Hostile Non-Player Character";
