@@ -25,10 +25,10 @@ class CharacterList extends Component {
     switch (this.props.characterType) {
       case charTypes.PC:
         return charTypes.PC_MSG;
-      case charTypes.NPC:
-        return charTypes.NPC_MSG;
-      case charTypes.ENEMY:
-        return charTypes.ENEMY_MSG;
+      case charTypes.FRIENDLY_NPC:
+        return charTypes.FRIENDLY_NPC_MSG;
+      case charTypes.HOSTILE_NPC:
+        return charTypes.HOSTILE_NPC_MSG
       default:
         return "Unknown Error";
     }

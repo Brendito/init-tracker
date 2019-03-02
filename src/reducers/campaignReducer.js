@@ -20,10 +20,8 @@ export const campaign = (state = initialCampaignState, action) => {
       };
     case types.SAVE_CAMPAIGN:
       let savedCampaigns = state.savedCampaigns.filter(campaign => {
-        console.log(action.campaign.id, "===", campaign.id);
         return campaign.id !== action.campaign.id;
       });
-      console.log(savedCampaigns);
       return {
         ...state,
         savedCampaigns: [...savedCampaigns, action.campaign]
@@ -32,7 +30,6 @@ export const campaign = (state = initialCampaignState, action) => {
       let loaded = state.savedCampaigns.filter(
         campaign => campaign.id === action.campaignId
       );
-      console.log(loaded[0]);
       return {
         ...state,
         loadedCampaign: loaded[0]
@@ -53,8 +50,8 @@ export const campaign = (state = initialCampaignState, action) => {
               }
             }
           };
-        case charTypes.NPC:
-          let npcs = state.loadedCampaign.characters.npcs.filter(
+        case charTypes.FRIENDLY_NPC:
+          let friendlyNpcs = state.loadedCampaign.characters.npcs.filter(
             char => char.id !== action.char.id
           );
           return {
@@ -63,12 +60,12 @@ export const campaign = (state = initialCampaignState, action) => {
               ...state.loadedCampaign,
               characters: {
                 ...state.loadedCampaign.characters,
-                npcs: [...npcs.concat(action.char)]
+                npcs: [...friendlyNpcs.concat(action.char)]
               }
             }
           };
-        case charTypes.ENEMY:
-          let enemies = state.loadedCampaign.characters.enemies.filter(
+        case charTypes.HOSTILE_NPC:
+          let hostileNpcs = state.loadedCampaign.characters.npcs.filter(
             char => char.id !== action.char.id
           );
           return {
@@ -77,12 +74,27 @@ export const campaign = (state = initialCampaignState, action) => {
               ...state.loadedCampaign,
               characters: {
                 ...state.loadedCampaign.characters,
-                enemies: [...enemies.concat(action.char)]
+                npcs: [...hostileNpcs.concat(action.char)]
               }
             }
           };
         default:
           return state;
+      }
+    case types.DELETE_CHAR:
+      switch (action.charType) {
+        case charTypes.FRIENDLY_NPC:
+         let npcs = state.loadedCampaign.characters.npcs.filter(npc => npc.id !== action.id)
+          return {
+            ...state,
+            loadedCampaign: {
+              ...state.loadedCampaign,
+              characters: {
+                ...state.loadedCampaign.characters,
+                npcs: [...npcs]
+              }
+            }
+          }
       }
     default:
       return state;

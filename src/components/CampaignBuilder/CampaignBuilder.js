@@ -1,11 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
-import { Container, Row, Col, Jumbotron, Button } from "reactstrap";
-import CharacterList from "../CharacterList/CharacterList";
+import { Container} from "reactstrap";
 import { saveCampaign } from "../../actions/campaignActions";
-import * as charTypes from "../../constants/characterTypes";
 import "./style.css";
+import NpcContainer from "../../containers/NpcContainer";
 
 class CampaignBuilder extends Component {
   constructor(props) {
@@ -44,7 +43,7 @@ class CampaignBuilder extends Component {
     }
     return (
       <Container>
-        <Jumbotron>{this.props.campaign.campaignName}</Jumbotron>
+        {/* <Jumbotron>{this.props.campaign.campaignName}</Jumbotron>
         <Row>
           <Col md="4">
             <CharacterList
@@ -58,14 +57,11 @@ class CampaignBuilder extends Component {
               charList={this.props.campaign.characters.npcs}
             />
           </Col>
-          <Col md="4">
-            <CharacterList
-              characterType={charTypes.ENEMY}
-              charList={this.props.campaign.characters.enemies}
-            />
-          </Col>
         </Row>
-        <Button className="mt-3" onClick={this.handleSave}>Save Changes to Campaign </Button>
+        <Button className="mt-3" onClick={this.handleSave}>
+          Save Changes to Campaign{" "}
+        </Button> */}
+        <NpcContainer/>
       </Container>
     );
   }
