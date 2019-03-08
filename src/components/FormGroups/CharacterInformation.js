@@ -1,30 +1,24 @@
 import React from "react";
 import { FormGroup, Label, Input } from "reactstrap";
-import * as charTypes from "../../constants/characterTypes";
 
 class CharacterInformation extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleInfo = this.handleInfo.bind(this);
-  }
-
-  handleInfo(event) {
+  handleInfo = event => {
     const name = event.target.name;
     const value = event.target.value;
-    this.props.listener(name, value, null);
-  }
+    this.props.listener(name, value);
+  };
 
   render() {
     return (
       <div>
         <h4>Character Info</h4>
         <FormGroup>
-          <Label for="characterName">Character Name</Label>
+          <Label for="name">Character Name</Label>
           <Input
             type="text"
-            name="characterName"
-            id="characterName"
-            placeholder={this.props.characterName}
+            name="name"
+            id="name"
+            placeholder={this.props.name}
             onChange={this.handleInfo}
           />
         </FormGroup>
@@ -48,18 +42,16 @@ class CharacterInformation extends React.Component {
             onChange={this.handleInfo}
           />
         </FormGroup>
-        {this.props.characterType === charTypes.PC && (
-          <FormGroup>
-            <Label for="characterLevel">Level</Label>
-            <Input
-              type="number"
-              name="characterLevel"
-              id="characterLevel"
-              placeholder={this.props.characterLevel}
-              onChange={this.handleInfo}
-            />
-          </FormGroup>
-        )}
+        <FormGroup>
+          <Label for="characterLevel">Level</Label>
+          <Input
+            type="number"
+            name="characterLevel"
+            id="characterLevel"
+            placeholder={this.props.characterLevel}
+            onChange={this.handleInfo}
+          />
+        </FormGroup>
       </div>
     );
   }

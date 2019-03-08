@@ -3,18 +3,11 @@ import { FormGroup, Input } from "reactstrap";
 import * as charTypes from "../../constants/characterClasses";
 
 class CharacterClass extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state ={
-      ...this.props,
-    }
-    this.handleChange = this.handleChange.bind(this);
-  }
 
-  handleChange(event) {
+  handleChange = (event) => {
     const name = event.target.name;
     const value = event.target.value;
-    this.props.listener(name, value, null);
+    this.props.listener(name, value);
   }
 
   render() {
@@ -26,7 +19,7 @@ class CharacterClass extends React.Component {
             type="select"
             name="characterClass"
             id="characterClass"
-            defaultValue={this.props.charClass}
+            defaultValue={this.props.characterClass}
           >
             <option value="">Select Class</option>
             <option value={charTypes.BARBARIAN}>Barbarian</option>
