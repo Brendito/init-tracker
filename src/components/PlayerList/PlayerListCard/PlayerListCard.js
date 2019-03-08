@@ -1,16 +1,11 @@
 import React, { Component } from "react";
 import { handleCharacterIcon } from "../../../utils/characterIconUtil";
-import { ListGroupItem, Modal } from "reactstrap";
-import CharacterForm from "../../CharacterForm/CharacterForm";
+import { ListGroupItem } from "reactstrap";
 
-class CharacterListCard extends Component {
+class PlayerListCard extends Component {
   constructor(props) {
     super(props);
-    this.state = { editorIsOpen: false };
-    this.toggleEditor = this.toggleEditor.bind(this);
-  }
-  toggleEditor() {
-    this.setState({ editorIsOpen: !this.state.editorIsOpen });
+    this.state = {};
   }
   render() {
     return (
@@ -34,17 +29,9 @@ class CharacterListCard extends Component {
             </div>
           </div>
         </div>
-        <Modal isOpen={this.state.editorIsOpen} toggle={this.toggleEditor}>
-          <CharacterForm
-            char={this.props}
-            newChar={false}
-            characterType={this.props.characterType}
-            closeModal={this.toggleEditor}
-          />
-        </Modal>
       </ListGroupItem>
     );
   }
 }
 
-export default CharacterListCard;
+export default PlayerListCard;
