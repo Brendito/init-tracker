@@ -1,76 +1,88 @@
-import React from "react";
-import * as types from "../../constants/formGroupTypes";
-import { FormGroup, Label, Input } from "reactstrap";
+import React from 'react'
+import { FormGroup, Label, Input, Row, Col } from 'reactstrap'
 
-class Attributes extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleAttributes = this.handleAttributes.bind(this);
-  }
+export default class Attributes extends React.Component {
+   handleAttributes = event => {
+      const name = event.target.name
+      const value = Number(event.target.value)
+      this.props.listener(name, value)
+   }
 
-  handleAttributes(event) {
-    const name = event.target.name;
-    const value = Number(event.target.value);
-    this.props.listener(name,value,types.ATTRIBUTES);
-  }
-
-  render() {
-    return (
-      <div>
-        <h4> Attribute Modifiers</h4>
-        <FormGroup>
-          <Label for="str">Strength</Label>
-          <Input
-            type="number"
-            name="str"
-            id="str"
-            placeholder={this.props.str}
-            onChange={this.handleAttributes}
-          />
-          <Label for="dex">Dexterity</Label>
-          <Input
-            type="number"
-            name="dex"
-            id="dex"
-            placeholder={this.props.dex}
-            onChange={this.handleAttributes}
-          />
-          <Label for="con">Constitution</Label>
-          <Input
-            type="number"
-            name="con"
-            id="con"
-            placeholder={this.props.con}
-            onChange={this.handleAttributes}
-          />
-          <Label for="wis">Wisdom</Label>
-          <Input
-            type="number"
-            name="wis"
-            id="wis"
-            placeholder={this.props.wis}
-            onChange={this.handleAttributes}
-          />
-          <Label for="int">Intellect</Label>
-          <Input
-            type="number"
-            name="int"
-            id="int"
-            placeholder={this.props.int}
-            onChange={this.handleAttributes}
-          />
-          <Label for="cha">Charisma</Label>
-          <Input
-            type="number"
-            name="cha"
-            id="cha"
-            placeholder={this.props.cha}
-            onChange={this.handleAttributes}
-          />
-        </FormGroup>
-      </div>
-    );
-  }
+   render() {
+      return (
+         <div>
+            <h4>Attribute Modifiers</h4>
+            <span className="font-italic font-weight-light">Optional Fields</span>
+            <hr/>
+            <FormGroup>
+               <Row>
+                  <Col sm="12" md="6">
+                     <FormGroup>
+                        <Label for="strength">Strength</Label>
+                        <Input
+                           type="number"
+                           name="strength"
+                           id="strength"
+                           placeholder={this.props.strength}
+                           onChange={this.handleAttributes}
+                        />
+                     </FormGroup>
+                     <FormGroup>
+                        <Label for="dexterity">Dexterity</Label>
+                        <Input
+                           type="number"
+                           name="dexterity"
+                           id="dexterity"
+                           placeholder={this.props.dexterity}
+                           onChange={this.handleAttributes}
+                        />
+                     </FormGroup>
+                     <FormGroup>
+                        <Label for="constitution">Constitution</Label>
+                        <Input
+                           type="number"
+                           name="constitution"
+                           id="constitution"
+                           placeholder={this.props.constitution}
+                           onChange={this.handleAttributes}
+                        />
+                     </FormGroup>
+                  </Col>
+                  <Col sm="12" md="6">
+                     <FormGroup>
+                        <Label for="wisdom">Wisdom</Label>
+                        <Input
+                           type="number"
+                           name="wisdom"
+                           id="wisdom"
+                           placeholder={this.props.wisdom}
+                           onChange={this.handleAttributes}
+                        />
+                     </FormGroup>
+                     <FormGroup>
+                        <Label for="intellect">Intellect</Label>
+                        <Input
+                           type="number"
+                           name="intellect"
+                           id="intellect"
+                           placeholder={this.props.intelligence}
+                           onChange={this.handleAttributes}
+                        />
+                     </FormGroup>
+                     <FormGroup>
+                        <Label for="charisma">Charisma</Label>
+                        <Input
+                           type="number"
+                           name="charisma"
+                           id="charisma"
+                           placeholder={this.props.charisma}
+                           onChange={this.handleAttributes}
+                        />
+                     </FormGroup>
+                  </Col>
+               </Row>
+            </FormGroup>
+         </div>
+      )
+   }
 }
-
-export default Attributes;
