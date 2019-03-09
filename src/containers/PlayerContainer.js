@@ -29,11 +29,13 @@ class PlayerContainer extends Component {
    toggleAddForm = () => {
       this.setState({
          addingChar: !this.state.addingChar,
+         editingChar: false,
       })
    }
 
    toggleEditForm = () => {
       this.setState({
+         addingChar: false,
          editingChar: true,
       })
    }
@@ -55,7 +57,7 @@ class PlayerContainer extends Component {
       return (
          <Container fluid>
             <Row>
-               <Col sm="12" md="4">
+               <Col sm="12" md="5" lg="3">
                   <PlayerList
                      handleDelete={this.handleDelete}
                      loadPlayer={this.loadPlayer}
@@ -63,11 +65,11 @@ class PlayerContainer extends Component {
                      players={this.props.players}
                   />
                </Col>
-               <Col sm="12" md="8">
+               <Col sm="12" md="7" lg="9">
                   {!this.state.addingChar && !this.state.editingChar && (
                      <div>
-                        <h4>Encounter Size Builder</h4>
-                        <h5>Placeholder</h5>
+                        <h4>Party Challenge Rating</h4>
+                        <h5>Placeholder, component to be made later</h5>
                      </div>
                   )}
                   {this.state.addingChar && (

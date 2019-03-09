@@ -9,6 +9,7 @@ class PlayerPage extends Component {
             <Container fluid>
                 <Jumbotron>
                     <h3>Player Manager</h3>
+                    <p>Manage your player's characters for your campaign here</p>
                 </Jumbotron>
                 <PlayerContainer />
             </Container>

@@ -56,6 +56,7 @@ class PlayerForm extends Component {
                onSubmit={this.handleSubmit}
                onKeyPress={this.handleKeyPress}>
                <h2>{this.handleMessage()}</h2>
+               <hr/>
                <Row>
                   <Col md="6">
                      <CharacterInformation
@@ -81,7 +82,7 @@ class PlayerForm extends Component {
                   </Col>
                </Row>
                <FormGroup>
-                  <Button className="mx-2" type="submit" color="primary">
+                  <Button type="submit" color="primary">
                     {this.props.newChar ? "Add Player" : "Save"}
                   </Button>
                   <Button

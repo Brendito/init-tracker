@@ -12,6 +12,7 @@ class Stats extends Component {
       return (
          <div>
             <h4>Character Stats</h4>
+            <hr />
             <FormGroup>
                <Label for="hit_points">Max HP</Label>
                <Input

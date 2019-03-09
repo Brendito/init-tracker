@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { deleteChar, saveCampaign } from '../../../actions/campaignActions'
 import * as charTypes from '../../../constants/characterTypes'
 import { handleCharacterIcon } from '../../../utils/characterIconUtil'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { ListGroupItem, Modal, Button } from 'reactstrap'
+import './style.css'
 
 class PlayerListCard extends Component {
    constructor(props) {
@@ -27,7 +26,10 @@ class PlayerListCard extends Component {
 
    render() {
       return (
-         <ListGroupItem key={this.props.id} onClick={this.toggleEditor}>
+         <ListGroupItem
+            className="my-1"
+            key={this.props.id}
+            onClick={this.toggleEditor}>
             <div className="d-flex">
                <div className="characterIcon mr-2">
                   {handleCharacterIcon(this.props.characterClass)}
@@ -68,12 +70,21 @@ class PlayerListCard extends Component {
                toggle={this.toggleDeleteModal}>
                <div className="p-3">
                   <h3>Permanently Delete {this.props.name}? </h3>
-                  <Button color="success" onClick={this.handleDelete}>
-                     Yes
-                  </Button>
-                  <Button color="danger" onClick={this.toggleDeleteModal}>
-                     No
-                  </Button>
+                  <p className="font-weight-light">
+                     You will not be able to recover the data for{' '}
+                     {this.props.name} once deleted.
+                  </p>
+                  <div className="mt-2">
+                     <Button color="success" onClick={this.handleDelete}>
+                        Yes
+                     </Button>
+                     <Button
+                        className="ml-2"
+                        color="danger"
+                        onClick={this.toggleDeleteModal}>
+                        No
+                     </Button>
+                  </div>
                </div>
             </Modal>
          </ListGroupItem>

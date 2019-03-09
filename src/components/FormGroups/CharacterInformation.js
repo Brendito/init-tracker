@@ -12,6 +12,7 @@ class CharacterInformation extends React.Component {
     return (
       <div>
         <h4>Character Info</h4>
+        <hr/>
         <FormGroup>
           <Label for="name">Character Name</Label>
           <Input
