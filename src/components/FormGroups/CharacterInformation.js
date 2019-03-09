@@ -42,16 +42,6 @@ class CharacterInformation extends React.Component {
             onChange={this.handleInfo}
           />
         </FormGroup>
-        <FormGroup>
-          <Label for="characterLevel">Level</Label>
-          <Input
-            type="number"
-            name="characterLevel"
-            id="characterLevel"
-            placeholder={this.props.characterLevel}
-            onChange={this.handleInfo}
-          />
-        </FormGroup>
       </div>
     );
   }
