@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import * as charTypes from "../../constants/characterTypes"
-import { saveCharToCampaign } from '../../actions/campaignActions'
+import * as charTypes from '../../constants/characterTypes'
+import { saveCharToCampaign, saveCampaign } from '../../actions/campaignActions'
 import { Form, FormGroup, Button, Row, Col } from 'reactstrap'
 import {
    CharacterInformation,
@@ -24,7 +24,12 @@ class PlayerForm extends Component {
    handleSubmit = e => {
       e.preventDefault()
       this.props.saveCharToCampaign(this.state)
-      this.props.toggle();
+      this.props.toggle()
+      this.handleSave()
+
+   }
+   handleSave = () => {
+      this.props.saveCampaign(this.props.campaign)
    }
 
    handleKeyPress = e => {
@@ -77,7 +82,7 @@ class PlayerForm extends Component {
                </Row>
                <FormGroup>
                   <Button className="mx-2" type="submit" color="primary">
-                     Add
+                    {this.props.newChar ? "Add Player" : "Save"}
                   </Button>
                   <Button
                      className="mx-2"
@@ -92,13 +97,18 @@ class PlayerForm extends Component {
    }
 }
 
+const mapStateToProps = state => ({
+   campaign: state.campaign.loadedCampaign,
+})
+
 const mapDispatchToProps = dispatch => {
    return {
       saveCharToCampaign: char => dispatch(saveCharToCampaign(char)),
+      saveCampaign: campaignId => dispatch(saveCampaign(campaignId)),
    }
 }
 
 export default connect(
-   null,
+   mapStateToProps,
    mapDispatchToProps
 )(PlayerForm)

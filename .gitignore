@@ -27,3 +27,6 @@ yarn-error.log*
 src/state\.js
 
 /assets
+prettier\.config\.js
+
+jsconfig\.json

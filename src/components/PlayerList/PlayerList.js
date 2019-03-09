@@ -13,6 +13,8 @@ class PlayerList extends Component {
             this.props.players.map(char => {
               return (
                 <PlayerListCard
+                  handleDelete={this.props.handleDelete}
+                  loadPlayer={this.props.loadPlayer}
                   key={char.id}
                   {...char}
                 />

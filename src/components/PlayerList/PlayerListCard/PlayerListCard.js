@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { deleteChar } from '../../../actions/campaignActions'
+import { deleteChar, saveCampaign } from '../../../actions/campaignActions'
 import * as charTypes from '../../../constants/characterTypes'
 import { handleCharacterIcon } from '../../../utils/characterIconUtil'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -14,7 +14,11 @@ class PlayerListCard extends Component {
       }
    }
    handleDelete = () => {
-      this.props.deleteChar(this.props.id, charTypes.PC)
+      this.props.handleDelete(this.props.id, charTypes.PC)
+   }
+
+   handleLoad = () => {
+      this.props.loadPlayer(this.props.id)
    }
 
    toggleDeleteModal = () => {
@@ -51,7 +55,7 @@ class PlayerListCard extends Component {
                <FontAwesomeIcon
                   icon="edit"
                   className="m-1"
-                  onClick={this.handleEdit}
+                  onClick={this.handleLoad}
                />
                <FontAwesomeIcon
                   icon="times"
@@ -77,15 +81,4 @@ class PlayerListCard extends Component {
    }
 }
 
-const mapDispatchToProps = dispatch => {
-   return {
-      deleteChar: (id, type) => {
-         dispatch(deleteChar(id, type))
-      },
-   }
-}
-
-export default connect(
-   null,
-   mapDispatchToProps
-)(PlayerListCard)
+export default PlayerListCard
