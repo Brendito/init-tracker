@@ -3,22 +3,16 @@ import { ListGroup, Button } from "reactstrap";
 import PlayerListCard from "./PlayerListCard/PlayerListCard";
 
 class PlayerList extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-    };
-  }
 
   render() {
     return (
       <div>
         <h4>Saved Players</h4>
         <ListGroup>
-          {this.props.charList &&
-            this.props.charList.map(char => {
+          {this.props.players &&
+            this.props.players.map(char => {
               return (
                 <PlayerListCard
-                  onCharSubmit={this.handleCharSubmit}
                   key={char.id}
                   {...char}
                 />
@@ -26,7 +20,7 @@ class PlayerList extends Component {
             })}
         </ListGroup>
 
-        <Button className="mt-3">
+        <Button onClick={this.props.addPlayer} className="mt-3">
           Create New Player
         </Button>
       </div>
