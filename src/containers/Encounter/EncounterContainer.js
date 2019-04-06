@@ -4,7 +4,7 @@ import {
    createEncounter,
    deleteEncounter,
    saveCampaign,
-} from '../actions/campaignActions'
+} from '../../actions/campaignActions'
 import {
    Container,
    Row,
@@ -19,7 +19,8 @@ import {
    Modal,
 } from 'reactstrap'
 import { v4 } from 'node-uuid'
-import EncounterBuilder from '../components/EncounterBuilder/EncounterBuilder'
+import EncounterBuilder from '../../components/EncounterBuilder/EncounterBuilder'
+import './styles.css'
 
 class EncounterContainer extends Component {
    constructor(props) {
@@ -81,7 +82,7 @@ class EncounterContainer extends Component {
          <Container fluid>
             {!this.state.loadedEncounter.id && (
                <div className="my-2">
-                  <h3>List of Encounters</h3>
+                  <h3>Saved Encounters</h3>
                   <hr />
                   {this.state.encounters.length > 0 ? (
                      <Row>
@@ -90,7 +91,10 @@ class EncounterContainer extends Component {
                               <Col key={encounter.id} md="4" className="my-2">
                                  <Card>
                                     <CardBody>
-                                       <CardTitle>{encounter.name}</CardTitle>
+                                       <CardTitle className="font-weight-bolder">
+                                          {encounter.name}
+                                       </CardTitle>
+                                       <hr />
                                        {encounter.totalExp !== undefined && (
                                           <CardSubtitle>
                                              Total Exp -{' '}
@@ -99,32 +103,47 @@ class EncounterContainer extends Component {
                                              </span>
                                           </CardSubtitle>
                                        )}
-                                       <div className="my-2">
-                                          <CardSubtitle>NPCs:</CardSubtitle>
-                                          <ul>
-                                             {encounter.list.map((npc, i) => {
-                                                return (
-                                                   <li
-                                                      className="font-weight-light"
-                                                      key={i}>
-                                                      {npc.name}
-                                                   </li>
-                                                )
-                                             })}
-                                          </ul>
+                                       <div className="my-3">
+                                          {encounter.list.length > 0 ? (
+                                             <div>
+                                                <CardSubtitle>
+                                                   NPCs:
+                                                </CardSubtitle>
+                                                <ul>
+                                                   <div className="d-flex flex-column flex-wrap npclist">
+                                                      {encounter.list.map(
+                                                         (npc, i) => {
+                                                            return (
+                                                               <li
+                                                                  className="font-weight-light"
+                                                                  key={i}>
+                                                                  {npc.name}
+                                                               </li>
+                                                            )
+                                                         }
+                                                      )}
+                                                   </div>
+                                                </ul>
+                                             </div>
+                                          ) : (
+                                             'This encounter does not have any NPCs added yet.'
+                                          )}
                                        </div>
+
+                                       <hr />
                                        <div className="d-flex justify-content-between">
                                           <Button
                                              data-id={encounter.id}
+                                             color="primary"
                                              onClick={this.editEncounter}>
                                              Edit
                                           </Button>
                                           <Button
                                              data-id={encounter.id}
+                                             color="danger"
                                              onClick={this.deleteEncounter}>
                                              Delete
                                           </Button>
-                                          <Button>Run</Button>
                                        </div>
                                     </CardBody>
                                  </Card>
@@ -157,9 +176,7 @@ class EncounterContainer extends Component {
                            }}
                            id="encounterName"
                         />
-                        <Button
-                           color="success"
-                           onClick={this.createEncounter}>
+                        <Button color="success" onClick={this.createEncounter}>
                            Save Encounter
                         </Button>
                      </div>

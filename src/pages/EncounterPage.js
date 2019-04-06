@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Container, Jumbotron } from 'reactstrap'
-import EncounterContainer from '../containers/EncounterContainer'
+import EncounterContainer from '../containers/Encounter/EncounterContainer'
 
 class EncounterPage extends Component {
    state = {
@@ -8,19 +8,21 @@ class EncounterPage extends Component {
    }
 
    toggleJumbo = () => {
-      window.scrollTo(0, 0);
+      window.scrollTo(0, 0)
       this.setState({
-         toggleJumbo: !this.state.toggleJumbo
+         toggleJumbo: !this.state.toggleJumbo,
       })
    }
 
    render() {
       return (
          <Container fluid>
-            <Jumbotron className={!this.state.toggleJumbo ? null : "hidden"}>
+            <Jumbotron className={!this.state.toggleJumbo ? null : 'hidden'}>
                <h3>Encounter Manager</h3>
-               <p>List encounters that are created, create new encounters.</p>
-               <p>User can add from saved NPCs or copy one from NPC List.  Players are added to encounter at the time of the run. </p>
+               <p>
+                  Create, edit and delete the encounters you will torment your
+                  party with.
+               </p>
             </Jumbotron>
             <EncounterContainer toggleJumbo={this.toggleJumbo} />
          </Container>

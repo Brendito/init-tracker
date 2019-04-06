@@ -121,7 +121,6 @@ class EncounterBuilder extends Component {
       return (
          <div>
             <p className="font-weight-light mb-1">Editing Encounter:</p>
-
             {!this.state.app.editingEncounterName ? (
                <div className="d-flex justify-content-between">
                   <h5 className="font-weight-bold mb-2">
@@ -138,7 +137,7 @@ class EncounterBuilder extends Component {
                   <Input
                      className="mb-2"
                      onChange={this.handleEncounterName}
-                     placeholder={this.props.encounter.name}
+                     placeholder={this.state.encounter.name}
                      onKeyPress={e => {
                         if (e.key === 'Enter') {
                            this.submitEncounterName()
