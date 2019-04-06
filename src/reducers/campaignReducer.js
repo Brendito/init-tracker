@@ -23,7 +23,7 @@ export const campaign = (state = initialCampaignState, action) => {
             return campaign.id !== action.campaign.id
          })
          return {
-            ...state,
+            loadedCampaign: { ...action.campaign },
             savedCampaigns: [...savedCampaigns, action.campaign],
          }
       case types.LOAD_CAMPAIGN:
@@ -113,6 +113,42 @@ export const campaign = (state = initialCampaignState, action) => {
                }
             default:
                return state
+         }
+      case types.CREATE_ENCOUNTER:
+         return {
+            ...state,
+            loadedCampaign: {
+               ...state.loadedCampaign,
+               encounters: [
+                  ...state.loadedCampaign.encounters,
+                  action.encounter,
+               ],
+            },
+         }
+      case types.SAVE_ENCOUNTER:
+         let savedEncounters = state.loadedCampaign.encounters.filter(
+            encounter => {
+               return encounter.id !== action.encounter.id
+            }
+         )
+         return {
+            ...state,
+            loadedCampaign: {
+               ...state.loadedCampaign,
+               encounters: [...savedEncounters, action.encounter],
+            },
+         }
+      case types.DELETE_ENCOUNTER:
+         return {
+            ...state,
+            loadedCampaign: {
+               ...state.loadedCampaign,
+               encounters: [
+                  ...state.loadedCampaign.encounters.filter(
+                     encounter => encounter.id !== action.id
+                  ),
+               ],
+            },
          }
       default:
          return state
