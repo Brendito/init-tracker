@@ -1,6 +1,17 @@
 import React, { Component } from 'react'
-import { Row, Col, Button, Modal, Card, CardBody, Input } from 'reactstrap'
+import {
+   Container,
+   Row,
+   Col,
+   Button,
+   Modal,
+   Card,
+   CardBody,
+   Input,
+} from 'reactstrap'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
+import { ENCOUNTERS_PAGE } from '../../constants/routes'
 import { saveEncounter, saveCampaign } from '../../actions/campaignActions'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import AddFromSavedNPCs from './AddFromSavedNPCs/AddFromSavedNPCs'
@@ -119,7 +130,7 @@ class EncounterBuilder extends Component {
 
    render() {
       return (
-         <div>
+         <Container fluid>
             <p className="font-weight-light mb-1">Editing Encounter:</p>
             {!this.state.app.editingEncounterName ? (
                <div className="d-flex justify-content-between">
@@ -232,9 +243,9 @@ class EncounterBuilder extends Component {
                   onClick={this.saveEncounter}>
                   Save
                </Button>
-               <Button color="warning" onClick={this.props.unloadEncounter}>
-                  Cancel
-               </Button>
+               <Link to={ENCOUNTERS_PAGE}>
+                  <Button color="warning">Cancel</Button>
+               </Link>
             </div>
 
             <Modal
@@ -252,14 +263,14 @@ class EncounterBuilder extends Component {
                toggle={this.toggleTemplateModal}>
                <h2>NPC LIST GOES HERE ONCE REFACTORED</h2>
             </Modal>
-         </div>
+         </Container>
       )
    }
 }
 
 const mapStateToProps = (state, ownProps) => ({
    encounter: state.campaign.loadedCampaign.encounters.find(
-      encounter => encounter.id === ownProps.encounterId
+      encounter => encounter.id === ownProps.location.state.encounterId
    ),
    campaign: state.campaign.loadedCampaign,
 })
