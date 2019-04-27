@@ -1,119 +1,223 @@
-import React, { Component } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  Container,
-  ListGroup,
-  ListGroupItem,
-  Input,
-  Button,
-  FormGroup,
-  Label
-} from "reactstrap";
-import { challengeRatings } from "../../constants/npcInformation";
-import "../style.css";
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { compose } from 'redux'
+import { NavLink } from 'react-router-dom'
+import * as routes from '../../constants/routes'
+import { titleCase, slugify } from '../../utils/utils'
+import { ListGroup, ListGroupItem, Modal, Button } from 'reactstrap'
+import withSizes from 'react-sizes'
+import { mapSizesToProps } from '../../hoc/screenSizes'
+import npcData from '../../assets/data/npcData'
+import ListFilter from '../ListFilter/ListFilter'
+import StatBlock from '../../components/StatBlock/StatBlock'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import './styles.css'
 
-function titleCase(str) {
-  return str
-    .toLowerCase()
-    .split(" ")
-    .map(function(word) {
-      return word.replace(word[0], word[0].toUpperCase());
-    })
-    .join(" ");
-}
+let templates = npcData
 
 class NpcList extends Component {
-  constructor(props) {
-    super(props);
-  }
+   constructor(props) {
+      super(props)
+      this.state = {
+         npcs: [],
+         filteredList: [],
+         preview: {
+            modal: false,
+            npc: {},
+         },
+      }
+   }
 
-  handleFilterChange = () => {
-    var searchFilter = document
-      .getElementById("searchFilter")
-      .value.toLowerCase();
-    var ratingFilter = document.getElementById("ratingFilter").value;
-    var dataFilter = document.getElementById("dataFilter").value;
-    this.props.onFilterChange(searchFilter, ratingFilter, dataFilter);
-  };
+   componentDidMount = () => {
+      const allNpcs = [].concat(...this.props.npcs, ...templates)
+      allNpcs.sort(function(a, b) {
+         if (a.name.toLowerCase() < b.name.toLowerCase()) {
+            return -1
+         }
+         if (a.name.toLowerCase() > b.name.toLowerCase()) {
+            return 1
+         }
+         return 0
+      })
+      this.setState({
+         npcs: [...allNpcs],
+      })
+   }
 
-  handleLoadNpc = e => {
-    const id =
-      e.target.dataset.id !== undefined
-        ? e.target.dataset.id
-        : e.target.parentNode.dataset.id;
-    this.props.loadNpc(id);
-  };
+   handleFilterChange = filteredList => {
+      if (filteredList.length !== this.state.npcs.length) {
+         this.setState({
+            filteredList: [...filteredList],
+         })
+      } else {
+         this.setState({
+            filteredList: [],
+         })
+      }
+   }
 
-  render() {
-    return (
-      <div className={this.props.className}>
-        <div className="d-flex justify-content-between">
-          <FormGroup>
-            <Label for="searchFilter">Search</Label>
-            <Input
-              id="searchFilter"
-              onChange={this.handleFilterChange}
-              placeholder="NPC Name..."
+   handleViewNpc = e => {
+      const id =
+         e.target.dataset.id !== undefined
+            ? e.target.dataset.id
+            : e.target.parentNode.dataset.id
+      const copiedNpc = [...this.state.npcs].find(npc => {
+         return String(npc.id) === String(id)
+      })
+      if (!this.props.isDesktop) {
+         this.setState({
+            preview: {
+               ...this.state.preview,
+               modal: true,
+               npc: { ...copiedNpc },
+            },
+         })
+      } else {
+         this.props.viewListener(copiedNpc)
+      }
+   }
+
+   toggleModal = () => {
+      this.setState({
+         preview: {
+            ...this.state.preview,
+            modal: !this.state.preview.modal,
+            npc: {},
+         },
+      })
+   }
+
+   render() {
+      return (
+         <div>
+            <ListFilter
+               npcs={[...this.state.npcs]}
+               listener={this.handleFilterChange}
             />
-          </FormGroup>
-          <FormGroup>
-            <Label for="ratingFilter">CR</Label>
-            <Input
-              id="ratingFilter"
-              type="select"
-              onChange={this.handleFilterChange}
-            >
-              <option value="">Any</option>
-              {challengeRatings.map(cr => {
-                return <option key={cr.rating}>{cr.rating}</option>;
-              })}
-            </Input>
-          </FormGroup>
-          <FormGroup>
-            <Label for="dataFilter">Source</Label>
-            <Input
-              type="select"
-              id="dataFilter"
-              onChange={this.handleFilterChange}
-            >
-              <option value="">All</option>
-              <option value="SRD">5e SRD</option>
-              <option value="Custom">Custom</option>
-            </Input>
-          </FormGroup>
-        </div>
-        <ListGroup>
-          {this.props.npcs &&
-            this.props.npcs.map((npc, i) => {
-              return (
-                <ListGroupItem key={i}>
-                  <div className="d-flex justify-content-between">
-                    <div className="d-flex flex-column ">
-                      <h5>{npc.name}</h5>
-                      <span>CR ({npc.challenge_rating})</span>
-                      <span>
-                        {npc.size} {titleCase(npc.type)}
-                      </span>
-                    </div>
-                    <div className="d-flex flex-column justify-content-between">
-                      <div className="text-right ">
-                        <FontAwesomeIcon
-                          icon="copy"
-                          className="mt-1"
-                          data-id={npc.id}
-                          onClick={this.handleLoadNpc}
-                        />
-                      </div>
-                      <span>{npc.dataType}</span>
-                    </div>
+            <ListGroup>
+               {this.state.filteredList &&
+                  this.state.filteredList.length > 0 &&
+                  this.state.filteredList.map((npc, i) => {
+                     return (
+                        <ListGroupItem className="my-1" key={i}>
+                           <div className="d-flex justify-content-between">
+                              <div className="d-flex flex-column ">
+                                 <h6 className="font-weight-bold">
+                                    {npc.name}
+                                 </h6>
+                                 <span>
+                                    CR ({npc.challenge_rating}) -{' '}
+                                    <span className="font-weight-light">
+                                       {npc.xp} xp
+                                    </span>
+                                 </span>
+                                 <span>
+                                    {npc.size} {titleCase(npc.type)}
+                                 </span>
+                              </div>
+                              <div className="d-flex flex-column justify-content-between text-right">
+                                 <NavLink
+                                    to={{
+                                       pathname: `${routes.NPC_FORM}${slugify(
+                                          npc.name
+                                       )}`,
+                                       state: {
+                                          npc: {
+                                             ...npc,
+                                             characterType: this.props.location
+                                                .state.characterType,
+                                          },
+                                       },
+                                    }}>
+                                    <div className="d-flex justify-content-end align-items-center">
+                                       <span className="font-weight-lighter cardtext cursor-pointer">
+                                          Copy
+                                       </span>
+                                       <FontAwesomeIcon
+                                          icon="copy"
+                                          className="ml-1 mt-1 cursor-pointer"
+                                       />
+                                    </div>
+                                 </NavLink>
+                                 <div className="d-flex justify-content-end align-items-center">
+                                    <span
+                                       data-id={npc.id}
+                                       onClick={this.handleViewNpc}
+                                       className="font-weight-lighter cardtext cursor-pointer">
+                                       Preview
+                                    </span>
+                                    <FontAwesomeIcon
+                                       icon="search"
+                                       className="ml-1 mt-1 cursor-pointer"
+                                       data-id={npc.id}
+                                       onClick={this.handleViewNpc}
+                                    />
+                                 </div>
+
+                                 <span className="font-weight-lighter text-right cardtext cursor-none">
+                                    {npc.dataType}
+                                 </span>
+                              </div>
+                           </div>
+                        </ListGroupItem>
+                     )
+                  })}
+               {this.state.filteredList &&
+                  this.state.filteredList.length === 0 && (
+                     <div className="p-1">
+                        <hr />
+                        <span className="font-weight-bold d-block">
+                           Search or filter your available NPCs to use
+                        </span>
+                        <span className="font-weight-light">
+                           You have the option of using any of the NPCs provided
+                           by Wizards of the Coast in the DnD 5e SRD.
+                        </span>
+                        <hr />
+                     </div>
+                  )}
+            </ListGroup>
+            <Modal isOpen={this.state.preview.modal} toggle={this.toggleModal}>
+               <div className="p-2">
+                  <StatBlock npc={this.state.preview.npc} modal={true} />
+                  <div className="d-flex justify-content-end mb-3">
+                     <NavLink
+                        to={{
+                           pathname: `${routes.NPC_FORM}${this.state.preview.npc
+                              .name && slugify(this.state.preview.npc.name)}`,
+                           state: {
+                              npc: {
+                                 ...this.state.preview.npc,
+                                 characterType: this.props.location.state
+                                    .characterType,
+                              },
+                           },
+                        }}>
+                        <Button className="mr-3" color="success">
+                           Use as Template
+                        </Button>
+                     </NavLink>
+                     <Button
+                        color="warning"
+                        onClick={this.toggleModal}>
+                        Close
+                     </Button>
                   </div>
-                </ListGroupItem>
-              );
-            })}
-        </ListGroup>
-      </div>
-    );
-  }
+               </div>
+            </Modal>
+         </div>
+      )
+   }
 }
 
-export default NpcList;
+const mapStateToProps = state => ({
+   npcs: state.campaign.loadedCampaign.characters.npcs,
+})
+
+export default compose(
+   connect(
+      mapStateToProps,
+      null
+   ),
+   withSizes(mapSizesToProps)
+)(NpcList)
