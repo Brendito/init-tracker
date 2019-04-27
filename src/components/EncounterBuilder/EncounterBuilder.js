@@ -103,7 +103,7 @@ class EncounterBuilder extends Component {
             app: { savedAdd: false, templateAdd: false },
          },
          () => {
-            this.props.saveCampaign(this.state.campaign)
+            this.props.saveEncounter(encounter)
             this.props.unloadEncounter()
          }
       )
