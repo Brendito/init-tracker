@@ -37,7 +37,9 @@ class LandingPage extends Component {
    }
 
    componentDidMount() {
-      this.props.clearCampaign()
+      if (this.props.loadedCampaign.id !== undefined) {
+         this.props.clearCampaign()
+      }
    }
 
    loadCampaignToBuilder(event) {
@@ -138,7 +140,7 @@ class LandingPage extends Component {
 }
 
 const mapStateToProps = state => {
-   return { savedCampaigns: [...state.campaign.savedCampaigns] }
+   return { savedCampaigns: [...state.campaign.savedCampaigns], loadedCampaign : {...state.campaign.loadedCampaign} }
 }
 
 const mapDispatchToProps = dispatch => {
