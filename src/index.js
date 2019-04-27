@@ -9,6 +9,7 @@ import rootReducer from "./reducers/rootReducer";
 import { BrowserRouter as Router } from "react-router-dom";
 import { loadState, saveState } from "./utils/localStorage";
 import throttle from "lodash/throttle";
+import watch from 'redux-watch'
 
 const persistedState = loadState();
 
@@ -19,6 +20,16 @@ const store = createStore(
     window.__REDUX_DEVTOOLS_EXTENSION__ &&
     window.__REDUX_DEVTOOLS_EXTENSION__()
 );
+
+let w = watch(store.getState, 'campaign.loadedCampaign')
+store.subscribe(w((newVal, oldVal, objectPath) => {
+  const storeState = store.getState()
+  const campaign = storeState.campaign.loadedCampaign
+  store.dispatch({
+    type: 'SAVE_CAMPAIGN',
+    campaign,
+ })
+}))
 
 store.subscribe(
   throttle(() => {
