@@ -23,7 +23,7 @@ export const campaign = (state = initialCampaignState, action) => {
             return campaign.id !== action.campaign.id
          })
          return {
-            loadedCampaign: { ...action.campaign },
+            ...state,
             savedCampaigns: [...savedCampaigns, action.campaign],
          }
       case types.LOAD_CAMPAIGN:
@@ -81,9 +81,10 @@ export const campaign = (state = initialCampaignState, action) => {
             default:
                return state
          }
+
       case types.DELETE_CHAR:
          switch (action.charType) {
-            case charTypes.FRIENDLY_NPC:
+            case charTypes.NPC:
                let npcs = state.loadedCampaign.characters.npcs.filter(
                   npc => npc.id !== action.id
                )

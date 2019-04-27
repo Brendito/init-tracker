@@ -7,6 +7,7 @@ export const npcSizes = [
   "Gargantuan"
 ];
 
+
 export const attributeTypes = [
   {
     name: "Strength",
@@ -131,6 +132,129 @@ export const statNumbers = [
   19,
   20
 ];
+
+export const modifiers = [
+  {
+    value : 1,
+    mod : -5
+  },
+  {
+    value : 2,
+    mod : -4
+  },
+  {
+    value : 3,
+    mod : -4
+  },
+  {
+    value : 4,
+    mod : -3
+  },
+  {
+    value : 5,
+    mod : -3
+  },
+  {
+    value : 6,
+    mod : -2
+  },
+  {
+    value : 7,
+    mod : -2
+  },
+  {
+    value : 8,
+    mod : -1
+  },
+  {
+    value : 9,
+    mod : -1
+  },
+  {
+    value : 10,
+    mod : 0
+  },
+  {
+    value : 11,
+    mod : 0
+  },
+  {
+    value : 12,
+    mod : 1
+  },
+  {
+    value : 13,
+    mod : 1
+  },
+  {
+    value : 14,
+    mod : 2
+  },
+  {
+    value : 15,
+    mod : 2
+  },
+  {
+    value : 16,
+    mod : 3
+  },
+  {
+    value : 17,
+    mod : 3
+  },
+  {
+    value : 18,
+    mod : 4
+  },
+  {
+    value : 19,
+    mod : 4
+  },
+  {
+    value : 20,
+    mod : 5
+  },
+  {
+    value : 21,
+    mod : 5
+  },
+  {
+    value : 22,
+    mod : 6
+  },
+  {
+    value : 23,
+    mod : 6
+  },
+  {
+    value : 24,
+    mod : 7
+  },
+  {
+    value : 25,
+    mod : 7
+  },
+  {
+    value : 26,
+    mod : 8
+  },
+  {
+    value : 27,
+    mod : 8
+  },
+  {
+    value : 28,
+    mod : 9
+  },
+  {
+    value : 29,
+    mod : 9
+  },
+  {
+    value : 30,
+    mod : 10
+  },
+]
 
 export const npcTypes = [
   "Abberation",
@@ -316,3 +440,37 @@ export const challengeRatings = [
     xp: 155000
   }
 ];
+
+export const blankNpc = {
+  name: '',
+  size: '',
+  type: '',
+  subtype: '',
+  alignment: '',
+  armor_class: 0,
+  hit_points: 0,
+  hit_dice: '',
+  speed: '',
+  strength: 0,
+  dexterity: 0,
+  constitution: 0,
+  intelligence: 0,
+  wisdom: 0,
+  charisma: 0,
+  constitution_save: 0,
+  intelligence_save: 0,
+  wisdom_save: 0,
+  damage_vulnerabilities: '',
+  damage_resistances: '',
+  damage_immunities: '',
+  condition_immunities: '',
+  senses: '',
+  languages: '',
+  challenge_rating: '',
+  special_abilities: [],
+  actions: [],
+  legendary_actions: [],
+  id: 0,
+  dataType: 'Custom',
+  xp: 0,
+}
