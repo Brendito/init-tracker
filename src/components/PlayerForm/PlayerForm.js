@@ -1,67 +1,58 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
+import { PLAYER_PAGE } from '../../constants/routes'
 import * as charTypes from '../../constants/characterTypes'
-import { saveCharToCampaign, saveCampaign } from '../../actions/campaignActions'
-import { Form, FormGroup, Button, Row, Col } from 'reactstrap'
+import { saveCharToCampaign } from '../../actions/campaignActions'
+import { Form, FormGroup, Button, Row, Col, Container } from 'reactstrap'
 import {
    CharacterInformation,
    Stats,
    Attributes,
    CharacterClass,
 } from '../FormGroups'
-import { v4 } from 'node-uuid'
 
 class PlayerForm extends Component {
    constructor(props) {
       super(props)
       this.state = {
-         id: v4(),
          characterType: charTypes.PC,
-         ...this.props.char,
+         ...this.props.player,
       }
    }
 
+   // Submit redux action to save player to campaign, replacing players via ID
    handleSubmit = e => {
-      e.preventDefault()
-      this.props.saveCharToCampaign(this.state)
-      this.props.toggle()
-      this.handleSave()
-
-   }
-   handleSave = () => {
-      this.props.saveCampaign(this.props.campaign)
-   }
-
-   handleKeyPress = e => {
-      if (e.key === 'Enter') {
-         this.handleSubmit(e)
+      if (this.state.name) {
+         this.props.saveCharToCampaign(this.state)
+      } else {
+         // TODO: Error state
+         console.log('No name')
       }
    }
 
+   // Listen to changes made in formGroups and update state
    formGroupListener = (name, value) => {
-      return this.setState({ ...this.state, [name]: value })
+      this.setState({ ...this.state, [name]: value })
    }
 
+   // Detect if editing a player or creating a new player and adjust messaging
    handleMessage = () => {
-      return this.props.newChar
+      return this.state.name === undefined
          ? 'Create New Player Character'
-         : 'Edit ' + this.state.name
+         :  this.state.name
    }
 
    render() {
       return (
-         <div>
-            <Form
-               id="charForm"
-               onSubmit={this.handleSubmit}
-               onKeyPress={this.handleKeyPress}>
-               <h2>{this.handleMessage()}</h2>
-               <hr/>
+         <Container>
+            <Form>
+               <h4>{this.handleMessage()}</h4>
+               <hr />
                <Row>
                   <Col md="6">
                      <CharacterInformation
                         listener={this.formGroupListener}
-                        characterType={this.state.characterType}
                         {...this.state}
                      />
                      <CharacterClass
@@ -73,7 +64,7 @@ class PlayerForm extends Component {
                      <Stats listener={this.formGroupListener} {...this.state} />
                   </Col>
                </Row>
-               <Row>
+               <Row className="mt-2">
                   <Col md="12">
                      <Attributes
                         listener={this.formGroupListener}
@@ -82,30 +73,41 @@ class PlayerForm extends Component {
                   </Col>
                </Row>
                <FormGroup>
-                  <Button type="submit" color="primary">
-                    {this.props.newChar ? "Add Player" : "Save"}
-                  </Button>
-                  <Button
-                     className="mx-2"
-                     onClick={this.props.toggle}
-                     color="warning">
-                     Cancel
-                  </Button>
+                  <Link to={PLAYER_PAGE}>
+                     <Button
+                        type="submit"
+                        onClick={this.handleSubmit}
+                        color="primary">
+                        {this.props.player === undefined
+                           ? 'Add Player'
+                           : 'Save'}
+                     </Button>
+                  </Link>
+                  <Link to={PLAYER_PAGE}>
+                     <Button className="mx-2" color="warning">
+                        Cancel
+                     </Button>
+                  </Link>
                </FormGroup>
             </Form>
-         </div>
+         </Container>
       )
    }
 }
 
-const mapStateToProps = state => ({
-   campaign: state.campaign.loadedCampaign,
+const mapStateToProps = (state, ownProps) => ({
+   player: state.campaign.loadedCampaign.characters.players.find(player => {
+      if (ownProps.location.state.playerId) {
+         return player.id === ownProps.location.state.playerId
+      } else {
+         return null
+      }
+   }),
 })
 
 const mapDispatchToProps = dispatch => {
    return {
       saveCharToCampaign: char => dispatch(saveCharToCampaign(char)),
-      saveCampaign: campaignId => dispatch(saveCampaign(campaignId)),
    }
 }
 

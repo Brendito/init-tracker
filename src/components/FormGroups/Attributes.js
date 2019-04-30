@@ -11,7 +11,7 @@ export default class Attributes extends React.Component {
    render() {
       return (
          <div>
-            <h4>Attribute Modifiers</h4>
+            <h5>Attribute Modifiers</h5>
             <span className="font-italic font-weight-light">Optional Fields</span>
             <hr/>
             <FormGroup>

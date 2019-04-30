@@ -11,7 +11,7 @@ class CharacterInformation extends React.Component {
   render() {
     return (
       <div>
-        <h4>Character Info</h4>
+        <h5>Character Info</h5>
         <hr/>
         <FormGroup>
           <Label for="name">Character Name</Label>
