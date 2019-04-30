@@ -12,6 +12,9 @@ import {
    faMinus,
    faSearch,
    faThumbtack,
+   faDiceD20,
+   faShieldAlt,
+   faHeartbeat,
 } from '@fortawesome/free-solid-svg-icons'
 import * as paths from '../../constants/routes'
 import * as pages from '../../pages'
@@ -19,6 +22,7 @@ import NavigationBar from '../NavigationBar/NavigationBar'
 import NpcFormContainer from '../../containers/NPC/NpcFormContainer'
 import NpcContainer from '../../containers/NPC/NpcContainer'
 import EncounterBuilder from '../EncounterBuilder/EncounterBuilder'
+import PlayerForm from '../../components/PlayerForm/PlayerForm'
 import NpcTemplateList from '../../containers/NPC/NpcTemplateList/NpcTemplateList'
 require('typeface-noto-sans')
 require('typeface-libre-baskerville')
@@ -31,7 +35,10 @@ library.add(
    faPlus,
    faMinus,
    faSearch,
-   faThumbtack
+   faThumbtack,
+   faDiceD20,
+   faShieldAlt,
+   faHeartbeat
 )
 
 class App extends Component {
@@ -46,7 +53,13 @@ class App extends Component {
                   component={pages.Campaign}
                />
                <Route path={paths.NPC_PAGE} component={NpcContainer} />
-               <Route path={paths.PLAYER_PAGE} component={pages.PlayerPage} />
+               <Route
+                  exact
+                  path={paths.PLAYER_PAGE}
+                  component={pages.PlayerPage}
+               />
+               <Route path={paths.PLAYER_FORM} component={PlayerForm} />
+
                <Route
                   exact
                   path={paths.ENCOUNTERS_PAGE}
