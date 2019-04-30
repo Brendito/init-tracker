@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Container, Jumbotron } from 'reactstrap'
-import PlayerContainer from '../containers/PlayerContainer'
+import PlayerContainer from '../containers/Player/PlayerContainer'
 
 class PlayerPage extends Component {
     state = {}

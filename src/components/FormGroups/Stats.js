@@ -11,7 +11,7 @@ class Stats extends Component {
    render() {
       return (
          <div>
-            <h4>Character Stats</h4>
+            <h5>Character Stats</h5>
             <hr />
             <FormGroup>
                <Label for="hit_points">Max HP</Label>
