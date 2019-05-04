@@ -1,16 +1,6 @@
-import * as types from "../constants/actionTypes";
+import * as types from '../constants/actionTypes'
 
-export const addToTracker = char => ({
-  type: types.ADD_TO_TRACKER,
-  char
-});
-
-export const removeFromTracker = key => ({
-  type: types.REMOVE_FROM_TRACKER,
-  key
-})
-
-export const editCharacter = char => ({
-  type: types.EDIT_CHARACTER,
-  char
+export const loadEncounter = encounter => ({
+   type: types.LOAD_ENCOUNTER,
+   encounter,
 })
