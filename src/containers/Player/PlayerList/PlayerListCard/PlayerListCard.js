@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { PLAYER_FORM } from '../../../../constants/routes'
 import { slugify } from '../../../../utils/utils'
-import { deleteChar } from '../../../../actions/campaignActions'
+import { deletePlayer } from '../../../../actions/loadedActions'
 import * as charTypes from '../../../../constants/characterTypes'
 import { handleCharacterIcon } from '../../../../utils/characterIconUtil'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -20,7 +20,7 @@ class PlayerListCard extends Component {
 
    // Delete redux action
    handleDelete = () => {
-      this.props.deleteChar(this.props.id, charTypes.PC)
+      this.props.deletePlayer(this.props.id, charTypes.PC)
    }
 
    toggleDeleteModal = () => {
@@ -137,7 +137,7 @@ class PlayerListCard extends Component {
 
 const mapDispatchToProps = dispatch => {
    return {
-      deleteChar: (id, type) => dispatch(deleteChar(id, type)),
+      deletePlayer: (id, type) => dispatch(deletePlayer(id, type)),
    }
 }
 

@@ -197,9 +197,7 @@ class NpcList extends Component {
                            Use as Template
                         </Button>
                      </NavLink>
-                     <Button
-                        color="warning"
-                        onClick={this.toggleModal}>
+                     <Button color="warning" onClick={this.toggleModal}>
                         Close
                      </Button>
                   </div>
@@ -211,13 +209,10 @@ class NpcList extends Component {
 }
 
 const mapStateToProps = state => ({
-   npcs: state.campaign.loadedCampaign.characters.npcs,
+   npcs: state.saved.npcs,
 })
 
 export default compose(
-   connect(
-      mapStateToProps,
-      null
-   ),
+   connect(mapStateToProps),
    withSizes(mapSizesToProps)
 )(NpcList)

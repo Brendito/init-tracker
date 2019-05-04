@@ -9,13 +9,20 @@ import {
    CardSubtitle,
    Button,
 } from 'reactstrap'
-import { deleteEncounter } from '../../../../actions/campaignActions'
-import { ENCOUNTER_BUILDER } from '../../../../constants/routes'
+import { deleteEncounter } from '../../../../actions/loadedActions'
+import { loadEncounter } from '../../../../actions/trackerActions'
+import { ENCOUNTER_BUILDER, TRACKER } from '../../../../constants/routes'
 import { slugify } from '../../../../utils/utils'
+
 class EncounterListCard extends Component {
    deleteEncounter = () => {
       this.props.deleteEncounter(this.props.encounter.id)
    }
+
+   runEncounter = () => {
+      this.props.loadEncounter(this.props.encounter)
+   }
+
    render() {
       return (
          <Col md="4" className="my-2">
@@ -59,27 +66,24 @@ class EncounterListCard extends Component {
                   <hr />
                   <div className="d-flex justify-content-between">
                      {/* LINK TO BUILDER */}
-
                      <Link
                         to={{
                            pathname: `${ENCOUNTER_BUILDER}${slugify(
                               this.props.encounter.name
                            )}`,
                            state: {
-                              encounterId : this.props.encounter.id
+                              encounterId: this.props.encounter.id,
                            },
                         }}>
-                        <Button
-                           color="primary"
-                           onClick={this.editEncounter}>
+                        <Button color="primary" onClick={this.editEncounter}>
                            Edit
                         </Button>
                      </Link>
-
+                     <Link to={TRACKER}>
+                        <Button color="success" onClick={this.runEncounter} />
+                     </Link>
                      {/* SEND DELETE ACTION */}
-                     <Button
-                        color="danger"
-                        onClick={this.deleteEncounter}>
+                     <Button color="danger" onClick={this.deleteEncounter}>
                         Delete
                      </Button>
                   </div>
@@ -94,6 +98,9 @@ const mapDispatchToProps = dispatch => {
    return {
       deleteEncounter: id => {
          dispatch(deleteEncounter(id))
+      },
+      loadEncounter: encounter => {
+         dispatch(loadEncounter(encounter))
       },
    }
 }

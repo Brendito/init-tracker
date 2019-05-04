@@ -21,10 +21,10 @@ const store = createStore(
     window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
-let w = watch(store.getState, 'campaign.loadedCampaign')
+let w = watch(store.getState, 'loaded')
 store.subscribe(w((newVal, oldVal, objectPath) => {
   const storeState = store.getState()
-  const campaign = storeState.campaign.loadedCampaign
+  const campaign = storeState.loaded.id ? storeState.loaded : null
   store.dispatch({
     type: 'SAVE_CAMPAIGN',
     campaign,

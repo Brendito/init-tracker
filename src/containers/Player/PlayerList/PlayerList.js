@@ -9,21 +9,18 @@ class PlayerList extends Component {
          <div>
             <h4>Saved Players</h4>
             <Row>
-            {/* Map all players to cards */}
+               {/* Map all players to cards */}
                {this.props.players &&
                   this.props.players.map(char => {
                      return <PlayerListCard key={char.id} {...char} />
                   })}
-                  </Row>
+            </Row>
          </div>
       )
    }
 }
 const mapStateToProps = state => ({
-   players: state.campaign.loadedCampaign.characters.players,
+   players: state.loaded.players,
 })
 
-export default connect(
-   mapStateToProps,
-   null
-)(PlayerList)
+export default connect(mapStateToProps)(PlayerList)

@@ -29,7 +29,7 @@ class EncounterList extends Component {
 }
 
 const mapStateToProps = state => ({
-   encounters: state.campaign.loadedCampaign.encounters,
+   encounters: state.loaded.encounters,
 })
 
 export default connect(

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { createEncounter } from '../../actions/campaignActions'
+import { createEncounter } from '../../actions/loadedActions'
 import { Container, Button, Input, Label, Modal } from 'reactstrap'
 import { v4 } from 'node-uuid'
 import './styles.css'

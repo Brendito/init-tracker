@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { PLAYER_PAGE } from '../../constants/routes'
 import * as charTypes from '../../constants/characterTypes'
-import { saveCharToCampaign } from '../../actions/campaignActions'
+import { savePlayer } from '../../actions/loadedActions'
 import { Form, FormGroup, Button, Row, Col, Container } from 'reactstrap'
 import {
    CharacterInformation,
@@ -24,7 +24,7 @@ class PlayerForm extends Component {
    // Submit redux action to save player to campaign, replacing players via ID
    handleSubmit = e => {
       if (this.state.name) {
-         this.props.saveCharToCampaign(this.state)
+         this.props.savePlayer(this.state)
       } else {
          // TODO: Error state
          console.log('No name')
@@ -40,7 +40,7 @@ class PlayerForm extends Component {
    handleMessage = () => {
       return this.state.name === undefined
          ? 'Create New Player Character'
-         :  this.state.name
+         : this.state.name
    }
 
    render() {
@@ -96,7 +96,7 @@ class PlayerForm extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => ({
-   player: state.campaign.loadedCampaign.characters.players.find(player => {
+   player: state.loaded.players.find(player => {
       if (ownProps.location.state.playerId) {
          return player.id === ownProps.location.state.playerId
       } else {
@@ -107,7 +107,7 @@ const mapStateToProps = (state, ownProps) => ({
 
 const mapDispatchToProps = dispatch => {
    return {
-      saveCharToCampaign: char => dispatch(saveCharToCampaign(char)),
+      savePlayer: player => dispatch(savePlayer(player)),
    }
 }
 
