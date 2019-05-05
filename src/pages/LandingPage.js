@@ -1,12 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { v4 } from 'node-uuid'
-import {
-   createCampaign,
-   loadCampaign,
-   clearCampaign,
-} from '../actions/campaignActions'
-import { Redirect } from 'react-router-dom'
+import { createCampaign, loadCampaign } from '../actions/savedActions'
+import { clearCampaign } from '../actions/loadedActions'
 import * as paths from '../constants/routes'
 import {
    Container,
@@ -26,85 +23,58 @@ class LandingPage extends Component {
       super(props)
       this.state = {
          ...this.state,
-         directToBuilder: false,
          createNewCampaignModalIsOpen: false,
       }
-
-      this.loadCampaignToBuilder = this.loadCampaignToBuilder.bind(this)
-      this.toggleCampaignCreateModal = this.toggleCampaignCreateModal.bind(this)
-      this.handleChange = this.handleChange.bind(this)
-      this.handleCreate = this.handleCreate.bind(this)
    }
 
-   componentDidMount() {
-      if (this.props.loadedCampaign.id !== undefined) {
-         this.props.clearCampaign()
-      }
-   }
-
-   loadCampaignToBuilder(event) {
-      const campId = event.target.getAttribute('data-id')
-      if (campId === null) {
-         return null
-      } else {
-         this.props.loadCampaign(campId)
-         this.setState({ ...this.state, directToBuilder: true })
-      }
-   }
-   toggleCampaignCreateModal(event) {
+   toggleCampaignCreateModal = () => {
       this.setState({
          ...this.state,
          createNewCampaignModalIsOpen: !this.state.createNewCampaignModalIsOpen,
+         campaign: {
+            players: [],
+            encounters: [],
+            id: v4(),
+         },
       })
    }
-   handleCreate(e) {
+   handleCreate = e => {
       e.preventDefault()
       this.toggleCampaignCreateModal()
       this.props.createCampaign(this.state.campaign)
    }
 
-   handleChange(event) {
-      const target = event.target
-      const value =
-         target.type === 'number' ? Number(target.value) : target.value
-      const name = target.name
+   handleChange = e => {
+      const value = e.target.value
+      const name = e.target.name
       this.setState({
          ...this.state,
-         directToBuilder: false,
          campaign: {
             ...this.state.campaign,
-            campaignName: '',
-            encounters: [],
-            characters: {
-               players: [],
-               npcs: [],
-               enemies: [],
-            },
-            id: v4(),
             [name]: value,
          },
       })
    }
 
    render() {
-      if (this.state.directToBuilder) {
-         return <Redirect push to={paths.CAMPAIGN_BUILDER} />
-      }
       return (
          <Container>
             <Jumbotron>Init Tracker</Jumbotron>
-            {this.props.savedCampaigns && (
+            {this.props.campaigns && (
                <div>
                   <h3>Load Saved Campaign</h3>
                   <ListGroup>
-                     {this.props.savedCampaigns.map(campaign => {
+                     {this.props.campaigns.map(campaign => {
                         return (
-                           <ListGroupItem
-                              key={campaign.id}
-                              data-id={campaign.id}
-                              onClick={this.loadCampaignToBuilder}>
-                              {campaign.campaignName}
-                           </ListGroupItem>
+                           <Link key={campaign.id} to={paths.CAMPAIGN_BUILDER}>
+                              <ListGroupItem
+                                 data-id={campaign.id}
+                                 onClick={() =>
+                                    this.props.loadCampaign(campaign)
+                                 }>
+                                 {campaign.campaignName}
+                              </ListGroupItem>
+                           </Link>
                         )
                      })}
                   </ListGroup>
@@ -139,15 +109,15 @@ class LandingPage extends Component {
    }
 }
 
-const mapStateToProps = state => {
-   return { savedCampaigns: [...state.campaign.savedCampaigns], loadedCampaign : {...state.campaign.loadedCampaign} }
-}
+const mapStateToProps = state => ({
+   campaigns: [...state.saved.campaigns],
+   loaded: { ...state.loaded },
+})
 
 const mapDispatchToProps = dispatch => {
    return {
       loadCampaign: campaignId => dispatch(loadCampaign(campaignId)),
       createCampaign: campaign => dispatch(createCampaign(campaign)),
-      clearCampaign: campaignId => dispatch(clearCampaign(campaignId)),
    }
 }
 
