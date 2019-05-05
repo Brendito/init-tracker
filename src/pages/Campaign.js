@@ -52,7 +52,7 @@ class CampaignPage extends Component {
 }
 
 const mapStateToProps = state => ({
-  campaign: state.campaign.loadedCampaign
+  campaign: state.loaded
 });
 
 export default connect(mapStateToProps)(CampaignPage);

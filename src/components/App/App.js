@@ -24,6 +24,7 @@ import NpcContainer from '../../containers/NPC/NpcContainer'
 import EncounterBuilder from '../EncounterBuilder/EncounterBuilder'
 import PlayerForm from '../../components/PlayerForm/PlayerForm'
 import NpcTemplateList from '../../containers/NPC/NpcTemplateList/NpcTemplateList'
+import TrackerContainer from '../../containers/Tracker/TrackerContainer'
 require('typeface-noto-sans')
 require('typeface-libre-baskerville')
 
@@ -74,6 +75,7 @@ class App extends Component {
                   path={paths.NPC_TEMPLATE_LIST}
                   component={NpcTemplateList}
                />
+               <Route path={paths.TRACKER} component={TrackerContainer} />
             </Switch>
          </div>
       )

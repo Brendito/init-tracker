@@ -12,7 +12,7 @@ import {
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { ENCOUNTERS_PAGE } from '../../constants/routes'
-import { saveEncounter, saveCampaign } from '../../actions/campaignActions'
+import { saveEncounter } from '../../actions/loadedActions'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import AddFromSavedNPCs from './AddFromSavedNPCs/AddFromSavedNPCs'
 import './styles.css'
@@ -105,6 +105,7 @@ class EncounterBuilder extends Component {
       let savedEncounters = this.state.campaign.encounters.filter(encounter => {
          return encounter.id !== this.props.encounterId
       })
+      console.log(savedEncounters)
       this.setState(
          {
             campaign: {
@@ -113,10 +114,7 @@ class EncounterBuilder extends Component {
             },
             app: { savedAdd: false, templateAdd: false },
          },
-         () => {
             this.props.saveEncounter(encounter)
-            this.props.unloadEncounter()
-         }
       )
    }
 
@@ -237,12 +235,14 @@ class EncounterBuilder extends Component {
             )}
             <hr />
             <div className="d-flex justify-content-start">
-               <Button
-                  color="success"
-                  className="mr-2"
-                  onClick={this.saveEncounter}>
-                  Save
-               </Button>
+               <Link to={ENCOUNTERS_PAGE}>
+                  <Button
+                     color="success"
+                     className="mr-2"
+                     onClick={this.saveEncounter}>
+                     Save
+                  </Button>
+               </Link>
                <Link to={ENCOUNTERS_PAGE}>
                   <Button color="warning">Cancel</Button>
                </Link>
@@ -269,19 +269,16 @@ class EncounterBuilder extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => ({
-   encounter: state.campaign.loadedCampaign.encounters.find(
+   encounter: state.loaded.encounters.find(
       encounter => encounter.id === ownProps.location.state.encounterId
    ),
-   campaign: state.campaign.loadedCampaign,
+   campaign : state.loaded
 })
 
 const mapDispatchToProps = dispatch => {
    return {
       saveEncounter: encounter => {
          dispatch(saveEncounter(encounter))
-      },
-      saveCampaign: campaign => {
-         dispatch(saveCampaign(campaign))
       },
    }
 }

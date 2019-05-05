@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { deleteChar, saveCampaign } from '../../actions/campaignActions'
+import { deleteNPC } from '../../actions/savedActions'
 import { ListGroup, Modal, Button } from 'reactstrap'
-import * as charTypes from '../../constants/characterTypes'
 import SavedNpcListCard from './SavedNpcListCard/SavedNpcListCard'
 
 class SavedNpcList extends Component {
@@ -14,17 +13,17 @@ class SavedNpcList extends Component {
             deleteId: '',
             npcName: '',
          },
-         list: [...this.props.charList],
+         list: [...this.props.npcs],
       }
    }
 
    componentWillReceiveProps = newProps => {
       this.setState({
-         list: [...newProps.charList],
+         list: [...newProps.npcs],
       })
    }
    submitNpcDelete = () => {
-      this.props.deleteChar(this.state.app.deleteId, charTypes.NPC)
+      this.props.deleteNPC(this.state.app.deleteId)
       this.toggleDeleteNpcModal()
    }
 
@@ -95,20 +94,16 @@ class SavedNpcList extends Component {
 
 const mapStateToProps = (state, ownProps) => {
    return {
-      charList: state.campaign.loadedCampaign.characters.npcs.filter(
+      npcs: state.saved.npcs.filter(
          npc => npc.characterType === ownProps.characterType
       ),
-      campaign: state.campaign.loadedCampaign,
    }
 }
 
 const mapDispatchToProps = dispatch => {
    return {
-      deleteChar: (id, type) => {
-         dispatch(deleteChar(id, type))
-      },
-      saveCampaign: campaign => {
-         dispatch(saveCampaign(campaign))
+      deleteNPC: (id, type) => {
+         dispatch(deleteNPC(id, type))
       },
    }
 }

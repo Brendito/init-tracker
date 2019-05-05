@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
-import { saveCharToCampaign } from '../../actions/campaignActions'
+import {saveNPC} from "../../actions/savedActions"
 import { v4 } from 'node-uuid'
 import { Container, Col, Row } from 'reactstrap'
 import NpcForm from '../../components/NpcForm/NpcForm'
@@ -39,7 +39,7 @@ class NpcFormContainer extends Component {
       } else {
          npc = { ...this.state.npc, dataType: 'Custom', id: v4() }
       }
-      this.props.saveCharToCampaign(npc)
+      this.props.saveNPC(npc)
    }
 
    handleSpecialFormChange = (obj, type) => {
@@ -130,8 +130,8 @@ class NpcFormContainer extends Component {
 
 const mapDispatchToProps = dispatch => {
    return {
-      saveCharToCampaign: char => {
-         dispatch(saveCharToCampaign(char))
+      saveNPC: char => {
+         dispatch(saveNPC(char))
       },
    }
 }

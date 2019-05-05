@@ -133,7 +133,7 @@ class AddFromSavedNPCs extends Component {
 }
 
 const mapStateToProps = state => ({
-   npcs: state.campaign.loadedCampaign.characters.npcs.filter(
+   npcs: state.saved.npcs.filter(
       npc => npc.characterType === charTypes.HOSTILE_NPC
    ),
 })
