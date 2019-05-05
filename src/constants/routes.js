@@ -8,3 +8,4 @@ export const ENCOUNTERS_PAGE = "/campaign/saved-encounters"
 export const CAMPAIGN_MANAGER = "/campaignmanager/:campaignName";
 export const CAMPAIGN_BUILDER = "/campaignbuilder";
 export const ENCOUNTER_BUILDER = "/campaign/saved-encounters/"
+export const TRACKER = "/tracker/"
