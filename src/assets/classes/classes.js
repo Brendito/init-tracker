@@ -12,10 +12,14 @@ import rogueSrc from './Rogue.png';
 import sorcererSrc from './Sorcerer.png';
 import warlockSrc from './Warlock.png';
 import wizardSrc from './Wizard.png';
+import monsterSrc from './Monster.png'
 
 
 export const Barbarian = (props) => {
     return (<img className={props.styles} alt="Barbarian Class Icon" src={barbarianSrc}/>)
+};
+export const Monster = (props) => {
+    return (<img className={props.styles} alt="Monster Icon" src={monsterSrc}/>)
 };
 export const Bard = (props) => {
     return (<img className={props.styles} alt="Bard Class Icon" src={bardSrc}/>)

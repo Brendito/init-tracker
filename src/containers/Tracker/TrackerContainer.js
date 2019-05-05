@@ -1,15 +1,18 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Container } from 'reactstrap'
+import TrackerHeader from './TrackerHeader/TrackerHeader'
+import TrackerList from './TrackerList/TrackerList'
 
 class TrackerContainer extends Component {
    render() {
       return (
-         <div>
-            <h1>{this.props.tracker && this.props.tracker.id}</h1>
-            {/* Tracker Header */}
+         <Container fluid>
+            <TrackerHeader />
+            <hr />
             {/* Tracker Controls */}
-            {/* Tracker List */}
-         </div>
+            <TrackerList/>
+         </Container>
       )
    }
 }

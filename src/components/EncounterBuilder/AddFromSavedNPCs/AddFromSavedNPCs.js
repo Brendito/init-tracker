@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Button, ListGroup, ListGroupItem } from 'reactstrap'
 import ListFilter from '../../ListFilter/ListFilter'
+import { getModifier } from '../../../utils/utils'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import * as charTypes from '../../../constants/characterTypes'
 import { connect } from 'react-redux'
@@ -65,6 +66,11 @@ class AddFromSavedNPCs extends Component {
       })
       savedList.forEach((el, i) => {
          el.listId = i
+         el.initMod = getModifier(el.dexterity)
+         el.tracker = {
+            current_hit_points: el.hit_points,
+            initTotal: 0,
+         }
       })
       this.props.addToEncounter(savedList)
       this.props.toggle()
@@ -121,10 +127,8 @@ class AddFromSavedNPCs extends Component {
                      )
                   })}
             </ListGroup>
-            <hr/>
-            <Button
-               color="primary"
-               onClick={this.saveEncounter}>
+            <hr />
+            <Button color="primary" onClick={this.saveEncounter}>
                Save
             </Button>
          </div>

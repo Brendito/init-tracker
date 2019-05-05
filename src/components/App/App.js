@@ -15,6 +15,7 @@ import {
    faDiceD20,
    faShieldAlt,
    faHeartbeat,
+   faCheckCircle,
 } from '@fortawesome/free-solid-svg-icons'
 import * as paths from '../../constants/routes'
 import * as pages from '../../pages'
@@ -29,6 +30,7 @@ require('typeface-noto-sans')
 require('typeface-libre-baskerville')
 
 library.add(
+   faCheckCircle,
    faEdit,
    faTimes,
    faCopy,

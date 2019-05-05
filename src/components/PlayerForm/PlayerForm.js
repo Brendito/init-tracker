@@ -17,6 +17,7 @@ class PlayerForm extends Component {
       super(props)
       this.state = {
          characterType: charTypes.PC,
+         id : this.props.location.state.playerId,
          ...this.props.player,
       }
    }

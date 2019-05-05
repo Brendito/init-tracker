@@ -1,6 +1,7 @@
 /* eslint-disable no-useless-escape */
 import * as types from '../constants/formGroupTypes'
 import { modifiers } from '../constants/npcInformation'
+
 export function formGroupListener(name, value, type, state) {
    switch (type) {
       case types.ATTRIBUTES:
