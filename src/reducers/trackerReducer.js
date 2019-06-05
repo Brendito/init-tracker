@@ -12,10 +12,10 @@ export const trackerReducer = (state = initialState, action) => {
          return {
             ...loadedEncounter
          }
-         case types.ADD_TO_TRACKER: 
+         case types.ADD_TO_TRACKER:
          return {
             ...state,
-            list : [...state.list, ...action.characters]
+            list : [...action.characters]
          }
       default:
          return state

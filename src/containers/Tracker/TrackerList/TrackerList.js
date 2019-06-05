@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import { Row, Modal } from 'reactstrap'
 import { connect } from 'react-redux'
 import CharacterCard from './CharacterCard/CharacterCard'
-import AddPlayers from './AddPlayers/AddPlayers'
+import AddCharacters from './AddCharacters/AddCharacters';
 
 class TrackerList extends Component {
    constructor(props) {
@@ -31,12 +30,12 @@ class TrackerList extends Component {
                   this.props.list.length > 0 &&
                   this.props.list.map(character => {
                      return (
-                        <CharacterCard key={character.listId} {...character} />
+                        <CharacterCard key={character.listId || character.id} {...character} />
                      )
                   })}
             </Row>
             <Modal isOpen={this.state.addPlayerModal} toggle={this.togglePlayerModal}>
-               <AddPlayers />
+               <AddCharacters toggle={this.togglePlayerModal}/>
             </Modal>
          </div>
       )

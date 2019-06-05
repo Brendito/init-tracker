@@ -1,17 +1,16 @@
+
 import React, { Component } from 'react'
 import { Button, ListGroup, ListGroupItem } from 'reactstrap'
-import ListFilter from '../../ListFilter/ListFilter'
-import { getModifier } from '../../../utils/utils'
+import ListFilter from '../../../../../components/ListFilter/ListFilter'
+import { getModifier } from '../../../../../utils/utils'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import * as charTypes from '../../../constants/characterTypes'
 import { connect } from 'react-redux'
-import './styles.css'
 
-class AddFromSavedNPCs extends Component {
+class AddNpc extends Component {
    constructor(props) {
       super(props)
       this.state = {
-         list: [...this.props.list],
+         list: [...this.props.list.filter(npc => npc.characterType === this.props.characterType)],
          filteredList: [...this.props.npcs],
       }
    }
@@ -29,9 +28,11 @@ class AddFromSavedNPCs extends Component {
             : e.target.parentNode.dataset.id
       const npclist = [].concat(this.props.npcs)
       const addedNPC = { ...npclist.find(npc => npc.id === id) }
+      const list = [...this.state.list, addedNPC]
       this.setState({
-         list: [...this.state.list, addedNPC],
+         list: [...list],
       })
+      this.handleListener(list);
    }
 
    removeFromEncounter = e => {
@@ -45,7 +46,9 @@ class AddFromSavedNPCs extends Component {
          ogList.splice(ogList.findIndex(e => e.id === f.id), 1)
       )
       filtered.splice(0, 1)
-      this.setState({ list: [...ogList, ...filtered] })
+      const list = [...ogList, ...filtered];
+      this.setState({ list: [...list] })
+      this.handleListener(list);
    }
 
    totalNPC = id => {
@@ -53,9 +56,8 @@ class AddFromSavedNPCs extends Component {
       return num.length
    }
 
-   saveEncounter = () => {
-      const savedList = [].concat(this.state.list)
-      savedList.sort((a, b) => {
+   handleListener = (list) => {
+      list.sort((a, b) => {
          if (a.name < b.name) {
             return -1
          }
@@ -64,8 +66,7 @@ class AddFromSavedNPCs extends Component {
          }
          return 0
       })
-      savedList.forEach((el, i) => {
-         el.listId = i
+      list.forEach((el, i) => {
          el.initMod = getModifier(el.dexterity)
          el.tracker = {
             current_hit_points: el.hit_points,
@@ -73,15 +74,12 @@ class AddFromSavedNPCs extends Component {
             inTracker : true
          }
       })
-      this.props.addToEncounter(savedList)
-      this.props.toggle()
+      this.props.listener(list, this.props.characterType)
    }
 
    render() {
       return (
-         <div className="p-3">
-            <p className="font-weight-bold mb-1">Add From Saved NPCS:</p>
-            <hr />
+         <div className="p-1">
             <ListFilter
                npcs={this.props.npcs}
                listener={this.handleFilterChange}
@@ -128,10 +126,6 @@ class AddFromSavedNPCs extends Component {
                      )
                   })}
             </ListGroup>
-            <hr />
-            <Button color="primary" onClick={this.saveEncounter}>
-               Save
-            </Button>
          </div>
       )
    }
@@ -139,11 +133,12 @@ class AddFromSavedNPCs extends Component {
 
 const mapStateToProps = (state, ownProps) => ({
    npcs: state.saved.npcs.filter(
-      npc => npc.characterType === ownProps.characterType || charTypes.HOSTILE_NPC
+      npc => npc.characterType === ownProps.characterType
    ),
+   list : state.tracker.list
 })
 
 export default connect(
    mapStateToProps,
    null
-)(AddFromSavedNPCs)
+)(AddNpc)

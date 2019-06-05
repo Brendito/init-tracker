@@ -79,6 +79,13 @@ class EncounterBuilder extends Component {
 
    handleAddToEncounter = list => {
       const newList = [...list]
+      newList.forEach(npc => {
+         npc.tracker = {
+            inTracker: true,
+            current_hit_points: npc.hit_points,
+            initTotal: 0,
+         }
+      })
       this.setState({
          encounter: { ...this.state.encounter, list: [...newList] },
       })
@@ -114,7 +121,7 @@ class EncounterBuilder extends Component {
             },
             app: { savedAdd: false, templateAdd: false },
          },
-            this.props.saveEncounter(encounter)
+         this.props.saveEncounter(encounter)
       )
    }
 
@@ -272,7 +279,7 @@ const mapStateToProps = (state, ownProps) => ({
    encounter: state.loaded.encounters.find(
       encounter => encounter.id === ownProps.location.state.encounterId
    ),
-   campaign : state.loaded
+   campaign: state.loaded,
 })
 
 const mapDispatchToProps = dispatch => {
