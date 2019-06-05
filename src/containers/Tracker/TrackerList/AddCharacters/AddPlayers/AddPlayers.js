@@ -1,24 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { addToTracker } from '../../../../../actions/trackerActions'
-import { ListGroup, ListGroupItem, Button } from 'reactstrap'
+import { sortByName } from '../../../../../utils/utils'
+import { ListGroup, ListGroupItem } from 'reactstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import './styles.css'
-
-const sortByName = array => {
-   const ar = array.sort((a, b) => {
-      var nameA = a.name.toUpperCase()
-      var nameB = b.name.toUpperCase()
-      if (nameA < nameB) {
-         return -1
-      }
-      if (nameA > nameB) {
-         return 1
-      }
-      return 0
-   })
-   return ar
-}
 
 class AddPlayers extends Component {
    constructor(props) {
@@ -70,7 +56,7 @@ class AddPlayers extends Component {
          player => player.tracker.inTracker === true
       )
       console.log('this is the new list', playersToAdd)
-      this.props.listener(playersToAdd, this.props.characterType);
+      this.props.listener(playersToAdd, this.props.characterType)
    }
 
    addPlayersToTracker = () => {

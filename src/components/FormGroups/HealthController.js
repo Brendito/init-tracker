@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import HealthBar from '../Tracker/CharacterCard/HealthBar/HealthBar'
-import * as types from '../../constants/formGroupTypes'
 import { Col, Input, Button } from 'reactstrap'
 
 class HealthController extends Component {

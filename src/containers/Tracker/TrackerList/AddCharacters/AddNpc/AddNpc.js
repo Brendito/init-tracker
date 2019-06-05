@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react'
-import { Button, ListGroup, ListGroupItem } from 'reactstrap'
+import { ListGroup, ListGroupItem } from 'reactstrap'
 import ListFilter from '../../../../../components/ListFilter/ListFilter'
 import { getModifier } from '../../../../../utils/utils'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'

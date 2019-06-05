@@ -1,12 +1,8 @@
 import React from 'react'
 import {
    Row,
-   Container,
    Col,
    Button,
-   Form,
-   FormGroup,
-   Label,
    Nav,
    NavItem,
    NavLink,

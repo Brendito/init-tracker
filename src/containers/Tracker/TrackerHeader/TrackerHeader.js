@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import { Container, Col, Button } from 'reactstrap'
+import { Container, Button } from 'reactstrap'
 import { connect } from 'react-redux'
 
 class TrackerHeader extends Component {
