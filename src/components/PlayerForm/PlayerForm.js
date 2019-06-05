@@ -17,7 +17,7 @@ class PlayerForm extends Component {
       super(props)
       this.state = {
          characterType: charTypes.PC,
-         id : this.props.location.state.playerId,
+         id: this.props.location.state.playerId,
          ...this.props.player,
       }
    }
@@ -25,6 +25,12 @@ class PlayerForm extends Component {
    // Submit redux action to save player to campaign, replacing players via ID
    handleSubmit = e => {
       if (this.state.name) {
+         const player = this.state
+         player.tracker = {
+            inTracker: false,
+            initTotal: 0,
+            current_hit_points: player.hit_points,
+         }
          this.props.savePlayer(this.state)
       } else {
          // TODO: Error state
