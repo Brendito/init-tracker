@@ -45,13 +45,28 @@ export function titleCase(str) {
    }
 }
 
+export function sortByName(array) {
+   const ar = array.sort((a, b) => {
+      var nameA = a.name.toUpperCase()
+      var nameB = b.name.toUpperCase()
+      if (nameA < nameB) {
+         return -1
+      }
+      if (nameA > nameB) {
+         return 1
+      }
+      return 0
+   })
+   return ar
+}
+
 export function sentenceCase(str) {
-   str = str.toLowerCase().split(' ');
+   str = str.toLowerCase().split(' ')
    for (var i = 0; i < str.length; i++) {
-     str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1);
+      str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1)
    }
-   return str.join(' ');
- }
+   return str.join(' ')
+}
 
 export function getModifier(value) {
    if (value >= 30) return '+10'
