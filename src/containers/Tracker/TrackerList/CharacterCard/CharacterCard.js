@@ -7,10 +7,9 @@ import './CharacterCard.css'
 import { titleCase } from '../../../../utils/utils'
 import { MONSTER } from '../../../../constants/characterClasses'
 import { Modal } from 'reactstrap'
-// import CharacterEditor from "../../CharacterEditor/CharacterEditor";
+import CharacterEditor from './CharacterEditor/CharacterEditor'
 import HealthBar from './HealthBar/HealthBar'
 import { handleCharacterIcon } from '../../../../utils/characterIconUtil'
-
 
 class CharacterCard extends React.Component {
    constructor(props) {
@@ -32,8 +31,8 @@ class CharacterCard extends React.Component {
                   <div className="d-flex justify-content-between mb-2">
                      <div className="d-flex">
                         <div className="characterIcon mr-3">
-                           {this.props.class
-                              ? handleCharacterIcon(this.props.class)
+                           {this.props.characterClass
+                              ? handleCharacterIcon(this.props.characterClass)
                               : handleCharacterIcon(MONSTER)}
                         </div>
                         <div className="d-flex flex-column">
@@ -70,12 +69,14 @@ class CharacterCard extends React.Component {
                      className="my-3"
                      hit_points={this.props.hit_points}
                      current_hit_points={
-                        this.props.tracker.current_hit_points && this.props.tracker.current_hit_points
+                        this.props.tracker.current_hit_points &&
+                        this.props.tracker.current_hit_points
                      }
                   />
                   <div className="d-flex justify-content-between py-2">
                      <Badge color="secondary">Status</Badge>
                      <Badge color="secondary">Reaction Used</Badge>
+                     <Badge color="secondary">Concentrating</Badge>
                   </div>
                   <div className="float-right">
                      <FontAwesomeIcon
@@ -90,9 +91,12 @@ class CharacterCard extends React.Component {
                   </div>
                </CardBody>
             </Card>
-            {/* <Modal isOpen={this.state.editorIsOpen} toggle={this.toggleEditor}>
-          <CharacterEditor closeModal={this.toggleEditor} {...this.props} />
-        </Modal> */}
+            <Modal isOpen={this.state.editorIsOpen} toggle={this.toggleEditor}>
+               <CharacterEditor
+                  closeModal={this.toggleEditor}
+                  {...this.props}
+               />
+            </Modal>
          </Col>
       )
    }
