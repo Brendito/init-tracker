@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Container, Col, Row } from 'reactstrap'
 import { mapSizesToProps } from '../../../hoc/screenSizes'
 import withSizes from 'react-sizes'
-import NpcList from '../../../components/NpcList/NpcList'
+import NpcList from '../NpcList/NpcList'
 import StatBlock from '../../../components/StatBlock/StatBlock'
 
 class NpcTemplateList extends Component {

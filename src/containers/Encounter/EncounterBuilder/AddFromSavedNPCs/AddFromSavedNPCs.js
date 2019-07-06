@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { Button, ListGroup, ListGroupItem } from 'reactstrap'
-import ListFilter from '../../ListFilter/ListFilter'
-import { getModifier } from '../../../utils/utils'
+import ListFilter from '../../../../components/ListFilter/ListFilter'
+import { getModifier } from '../../../../utils/utils'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import * as charTypes from '../../../constants/characterTypes'
+import * as charTypes from '../../../../constants/characterTypes'
 import { connect } from 'react-redux'
 import './styles.css'
 

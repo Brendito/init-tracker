@@ -1,6 +1,6 @@
 import React from 'react'
 import { Col, Button, Jumbotron } from 'reactstrap'
-import SavedNpcList from '../../../components/SavedNpcList/SavedNpcList'
+import SavedNpcList from '../SavedNpcList/SavedNpcList'
 import * as charTypes from '../../../constants/characterTypes'
 
 export default props => {

@@ -4,7 +4,7 @@ import { compose } from 'redux'
 import {saveNPC} from "../../actions/savedActions"
 import { v4 } from 'node-uuid'
 import { Container, Col, Row } from 'reactstrap'
-import NpcForm from '../../components/NpcForm/NpcForm'
+import NpcForm from './NpcForm/NpcForm'
 import StatBlock from '../../components/StatBlock/StatBlock'
 import { mapSizesToProps } from '../../hoc/screenSizes'
 import withSizes from 'react-sizes'

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { deleteNPC } from '../../actions/savedActions'
+import { deleteNPC } from '../../../actions/savedActions'
 import { ListGroup, Modal, Button } from 'reactstrap'
 import SavedNpcListCard from './SavedNpcListCard/SavedNpcListCard'
 

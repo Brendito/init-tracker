@@ -1,16 +1,16 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { PLAYER_PAGE } from '../../constants/routes'
-import * as charTypes from '../../constants/characterTypes'
-import { savePlayer } from '../../actions/loadedActions'
+import { PLAYER_PAGE } from '../../../constants/routes'
+import * as charTypes from '../../../constants/characterTypes'
+import { savePlayer } from '../../../actions/loadedActions'
 import { Form, FormGroup, Button, Row, Col, Container } from 'reactstrap'
 import {
    CharacterInformation,
    Stats,
    Attributes,
    CharacterClass,
-} from '../FormGroups'
+} from '../../../components/FormGroups'
 
 class PlayerForm extends Component {
    constructor(props) {

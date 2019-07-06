@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import HealthBar from '../Tracker/CharacterCard/HealthBar/HealthBar'
+import HealthBar from "../../containers/Tracker/TrackerList/CharacterCard/HealthBar/HealthBar"
 import { Col, Input, Button } from 'reactstrap'
 
 class HealthController extends Component {
