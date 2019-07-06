@@ -1,44 +1,30 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+# Combat Tracker 5e
 
-In the project directory, you can run:
+Combat Tracker 5e is a tool for Dungeons and Dragons 5e that helps Game Masters manage tracking health, initiative, players and more during combat.
 
-### `npm start`
+The tool is written in React and uses Redux for state management.
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Future Plans
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+This tool is a WIP, there are many features planned.  Here are upcoming features, in relatively priority order:
 
-### `npm test`
+-- Campaign Management (Complete)
+-- Combat Tracking (On Hold)
+-- Typescript Refactoring (Beginning)
+-- Unit Testing
+-- Firebase Authentication and Database syncing
+-- Alpha Release
+-- Spells
+-- Campaign Notes
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Development Notes
+This is my personal project that I've learnt React and Redux with.  This is my second iteration of the app, my first iteration was focused on the combat tracking but managing state became a trouble.  I decided to restart and focus on the campaign management first in order to lay the ground work for the combat tracking features later.
 
-### `npm run build`
+At the start of the second iteration, I had a personal battle with myself on whether to begin using Typescript and writing unit tests.  What I found was, I was still learning how to properly use React and Redux and was having to refactor code so often that writing unit tests was slowing down my learning process.  Not using Typescript from the start has become a big regret, I'm currently beginning the process of refactoring to use Typescript before moving forward with the combat tracking.  Maybe I'll write a few unit tests along the way.
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+This is still very much so a WIP and it's been a long journey.  I've grown so much since I started the app that I'm constantly spotting things to refactor and write differently.  I can't wait to continue growing and learning better ways to code.
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+## Licenses
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+All of the prebuilt content in the tool is free to use material from Wizards of the Coast from the DnD 5e SRD.
