@@ -18,9 +18,10 @@ class PlayerListCard extends Component {
       }
    }
 
-   // Delete redux action
+   // Send redux action and toggle modal
    handleDelete = () => {
       this.props.deletePlayer(this.props.id, charTypes.PC)
+      this.toggleDeleteModal();
    }
 
    toggleDeleteModal = () => {
@@ -34,6 +35,7 @@ class PlayerListCard extends Component {
                <div className="d-flex justify-content-between">
                   <div className="d-flex">
                      <div className="characterIcon mr-3 mt-2">
+                        {/* Render Character Icon */}
                         {handleCharacterIcon(this.props.characterClass)}
                      </div>
                      <div>
@@ -87,6 +89,7 @@ class PlayerListCard extends Component {
                </div>
                <hr />
                <div className="d-flex justify-content-end">
+                  {/* Link to Player Form with Player ID which is used to get player from store. */}
                   <Link
                      to={{
                         pathname: `${PLAYER_FORM}${slugify(this.props.name)}`,
@@ -99,6 +102,7 @@ class PlayerListCard extends Component {
                      </span>
                      <FontAwesomeIcon icon="edit" className="mt-1 ml-2" />
                   </Link>
+                  {/* Toggle Delete Modal */}
                   <span
                      className="font-weight-light ml-3 cursor-pointer"
                      onClick={this.toggleDeleteModal}>
@@ -107,7 +111,7 @@ class PlayerListCard extends Component {
                   </span>
                </div>
             </Card>
-
+            {/* Modal */}
             <Modal
                isOpen={this.state.deletingNpc}
                toggle={this.toggleDeleteModal}>
