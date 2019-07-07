@@ -16,6 +16,7 @@ export default props => {
             <Col sm="12" md="6">
                <div className="d-flex justify-content-between">
                   <h4 className="d-inline-block mt-2">Hostile NPCs</h4>
+                  {/* Create new Hostile NPC */}
                   <Button
                      color="primary"
                      onClick={e => {
@@ -26,12 +27,14 @@ export default props => {
                   </Button>
                </div>
                <hr />
+               {/* List all Hostile NPCs */}
                <SavedNpcList characterType={charTypes.HOSTILE_NPC} />
             </Col>
             <div className="border-left mx-2" />
             <Col sm="12" md="6">
                <div className="d-flex justify-content-between">
                   <h4 className="d-inline-block mt-2">Friendly NPCs</h4>
+                  {/* Create new Friendly NPC */}
                   <Button
                      color="primary"
                      onClick={e => {
@@ -42,6 +45,7 @@ export default props => {
                   </Button>
                </div>
                <hr />
+               {/* List all Friendly NPCs */}
                <SavedNpcList characterType={charTypes.FRIENDLY_NPC} />
             </Col>
          </div>

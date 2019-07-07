@@ -20,6 +20,7 @@ class SavedNpcListCard extends Component {
                   </span>
                </div>
                <div className="d-flex flex-column justify-content-around">
+               {/* Link to NPC form with the NPC data */}
                   <Link
                   className="text-right"
                      to={{

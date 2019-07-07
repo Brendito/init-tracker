@@ -26,7 +26,6 @@ class SavedNpcList extends Component {
       this.props.deleteNPC(this.state.app.deleteId)
       this.toggleDeleteNpcModal()
    }
-
    toggleDeleteNpcModal = (id, name) => {
       this.setState({
          app: {
@@ -42,6 +41,7 @@ class SavedNpcList extends Component {
       return (
          <div className="mt-2">
             <ListGroup>
+               {/* Filter out all the saved NPCs of the type passed to component */}
                {this.state.list.length > 0 ? (
                   this.state.list
                      .filter(

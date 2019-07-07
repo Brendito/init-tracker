@@ -16,7 +16,7 @@ class NpcContainer extends Component {
          addModal: false,
       }
    }
-
+   // Listen to which character type the user is interacting with
    setCharacterType = type => {
       this.setState({
          characterType: type,
@@ -32,6 +32,7 @@ class NpcContainer extends Component {
    render() {
       return (
          <Container fluid>
+            {/* Render Mobile or Large - Revisit this approach later */}
             {this.props.isMobile && (
                <NpcMobileLanding
                   setCharacterType={this.setCharacterType}
@@ -56,6 +57,7 @@ class NpcContainer extends Component {
                      SRD or start one from scratch.
                   </p>
                   <div className="d-flex justify-content-between">
+                  {/* Send the user to either the Template list or NPC form, depending on what they selected in the Landing */}
                      <Link
                         to={{
                            pathname: routes.NPC_TEMPLATE_LIST,
