@@ -22,8 +22,13 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-package-lock\.json
-
-package\.json
+/assets
 
 src/state\.js
+
+/assets
+prettier\.config\.js
+
+jsconfig\.json
+
+fonts/

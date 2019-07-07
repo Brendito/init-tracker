@@ -1,4 +1,10 @@
-import {tracker} from './trackerReducer';
-import {combineReducers} from 'redux';
+import { savedReducer } from './savedReducer'
+import { loadedReducer } from './loadedReducer'
+import { trackerReducer } from './trackerReducer'
+import { combineReducers } from 'redux'
 
-export default combineReducers({tracker})
+export default combineReducers({
+   saved: savedReducer,
+   loaded: loadedReducer,
+   tracker: trackerReducer,
+})

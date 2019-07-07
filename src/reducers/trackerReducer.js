@@ -1,26 +1,23 @@
-import * as types from "../constants/actionTypes";
+import actionTypes from '../actions'
 
 const initialState = {
-  list: []
-};
-export const tracker = (state = initialState, action) => {
-  switch (action.type) {
-    case types.ADD_TO_TRACKER:
-    // TODO: Edge case when adding character with same information
-      let list = [...state.list];
-      const char = action.char;
-      char.key = list.length + 1;
-      list.push(char);
-      return {
-        ...state,
-        list: list
-      };
-    case types.REMOVE_FROM_TRACKER:
-      return {
-        ...state,
-        list: state.list.filter(el => el.key !== action.key)
-      };
-    default:
-      return state;
-  }
-};
+   list: [],
+   id: '',
+}
+export const trackerReducer = (state = initialState, action) => {
+   switch (action.type) {
+      case actionTypes.LOAD_ENCOUNTER:
+         const loadedEncounter = action.encounter
+         console.log(state.campaign)
+         return {
+            ...loadedEncounter,
+         }
+      case actionTypes.ADD_TO_TRACKER:
+         return {
+            ...state,
+            list: [...action.characters],
+         }
+      default:
+         return state
+   }
+}
