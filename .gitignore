@@ -30,3 +30,5 @@ src/state\.js
 prettier\.config\.js
 
 jsconfig\.json
+
+fonts/

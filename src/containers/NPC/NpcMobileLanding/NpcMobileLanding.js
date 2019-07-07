@@ -10,7 +10,7 @@ import {
    TabPane,
    Button,
 } from 'reactstrap'
-import SavedNpcList from '../../../components/SavedNpcList/SavedNpcList'
+import SavedNpcList from '../SavedNpcList/SavedNpcList'
 import * as charTypes from '../../../constants/characterTypes'
 
 export default class NpcMobileLanding extends Component {

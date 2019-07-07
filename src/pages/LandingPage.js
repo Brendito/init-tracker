@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { v4 } from 'node-uuid'
 import { createCampaign, loadCampaign } from '../actions/savedActions'
-import { clearCampaign } from '../actions/loadedActions'
 import * as paths from '../constants/routes'
 import {
    Container,

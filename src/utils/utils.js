@@ -1,19 +1,5 @@
 /* eslint-disable no-useless-escape */
-import * as types from '../constants/formGroupTypes'
 import { modifiers } from '../constants/npcInformation'
-export function formGroupListener(name, value, type, state) {
-   switch (type) {
-      case types.ATTRIBUTES:
-         return { attributes: { ...state.attributes, [name]: value } }
-      // case types.STATS:
-      //   this.setState({
-      //     stats: { ...this.state.stats, [name]: value }
-      //   });
-      //   break;
-      default:
-         return { [name]: value }
-   }
-}
 
 export function slugify(string) {
    const a = 'àáäâãåăæçèéëêǵḧìíïîḿńǹñòóöôœṕŕßśșțùúüûǘẃẍÿź·/_,:;'
@@ -44,13 +30,28 @@ export function titleCase(str) {
    }
 }
 
+export function sortByName(array) {
+   const ar = array.sort((a, b) => {
+      var nameA = a.name.toUpperCase()
+      var nameB = b.name.toUpperCase()
+      if (nameA < nameB) {
+         return -1
+      }
+      if (nameA > nameB) {
+         return 1
+      }
+      return 0
+   })
+   return ar
+}
+
 export function sentenceCase(str) {
-   str = str.toLowerCase().split(' ');
+   str = str.toLowerCase().split(' ')
    for (var i = 0; i < str.length; i++) {
-     str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1);
+      str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1)
    }
-   return str.join(' ');
- }
+   return str.join(' ')
+}
 
 export function getModifier(value) {
    if (value >= 30) return '+10'
@@ -63,12 +64,13 @@ export function getModifier(value) {
    }
 }
 
+// TODO: There has to be a better way to do this, search for library.
 export function npcFilter(chars, searchFilter, ratingFilter, dataFilter) {
    const filteredNPCs = chars.filter(npc => {
       // All filtered
       if (searchFilter !== '' && ratingFilter !== '' && dataFilter !== '') {
          return (
-            npc.name.toLowerCase().search(searchFilter.toLowerCase()) !== -1 &&
+            npc.name.toLowerCase().indexOf(searchFilter.toLowerCase()) !== -1 &&
             npc.challenge_rating === ratingFilter &&
             npc.dataType === dataFilter
          )
@@ -78,7 +80,7 @@ export function npcFilter(chars, searchFilter, ratingFilter, dataFilter) {
          ratingFilter === '' &&
          dataFilter === ''
       ) {
-         return npc.name.toLowerCase().search(searchFilter.toLowerCase()) !== -1
+         return npc.name.toLowerCase().indexOf(searchFilter.toLowerCase()) !== -1
       }
       // Rating Only
       else if (
@@ -114,7 +116,7 @@ export function npcFilter(chars, searchFilter, ratingFilter, dataFilter) {
       ) {
          return (
             npc.dataType === dataFilter &&
-            npc.name.toLowerCase().search(searchFilter.toLowerCase()) !== -1
+            npc.name.toLowerCase().indexOf(searchFilter.toLowerCase()) !== -1
          )
       }
       // Search and Rating
@@ -125,7 +127,7 @@ export function npcFilter(chars, searchFilter, ratingFilter, dataFilter) {
       ) {
          return (
             npc.challenge_rating === ratingFilter &&
-            npc.name.toLowerCase().search(searchFilter.toLowerCase()) !== -1
+            npc.name.toLowerCase().indexOf(searchFilter.toLowerCase()) !== -1
          )
       } else {
          return npc

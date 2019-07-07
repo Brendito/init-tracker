@@ -14,19 +14,19 @@ import {
    npcSizes,
    npcTypes,
    challengeRatings,
-} from '../../constants/npcInformation'
-import { mapSizesToProps } from '../../hoc/screenSizes'
+} from '../../../constants/npcInformation'
+import { mapSizesToProps } from '../../../hoc/screenSizes'
 import withSizes from 'react-sizes'
 import { Link } from 'react-router-dom'
-import { NPC_PAGE } from '../../constants/routes'
+import { NPC_PAGE } from '../../../constants/routes'
 import {
    NpcSavingThrows,
    NpcSkills,
    NpcSpecialAbilities,
    NpcActions,
-} from '../../components/FormGroups/'
-import StatBlock from '../../components/StatBlock/StatBlock'
-import { titleCase, sentenceCase } from '../../utils/utils'
+} from '../../../components/FormGroups'
+import StatBlock from '../../../components/StatBlock/StatBlock'
+import { titleCase, sentenceCase } from '../../../utils/utils'
 import './styles.css'
 
 class NpcForm extends Component {

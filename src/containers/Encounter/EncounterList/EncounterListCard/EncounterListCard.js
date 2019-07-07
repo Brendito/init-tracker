@@ -80,7 +80,9 @@ class EncounterListCard extends Component {
                         </Button>
                      </Link>
                      <Link to={TRACKER}>
-                        <Button color="success" onClick={this.runEncounter} />
+                        <Button color="success" onClick={this.runEncounter}>
+                           Start
+                        </Button>
                      </Link>
                      {/* SEND DELETE ACTION */}
                      <Button color="danger" onClick={this.deleteEncounter}>

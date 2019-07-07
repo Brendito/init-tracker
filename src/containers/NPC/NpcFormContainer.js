@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
-import {saveNPC} from "../../actions/savedActions"
+import { saveNPC } from '../../actions/savedActions'
 import { v4 } from 'node-uuid'
 import { Container, Col, Row } from 'reactstrap'
-import NpcForm from '../../components/NpcForm/NpcForm'
+import NpcForm from './NpcForm/NpcForm'
 import StatBlock from '../../components/StatBlock/StatBlock'
 import { mapSizesToProps } from '../../hoc/screenSizes'
 import withSizes from 'react-sizes'
@@ -24,14 +24,14 @@ class NpcFormContainer extends Component {
          characterType: nextProps.characterType,
       })
    }
-
+   // Listen for form changes
    handleFormChange = (name, value) => {
       this.setState({
          ...this.state,
          npc: { ...this.state.npc, [name]: value },
       })
    }
-
+   // Send redux action with the npc, generate a new ID if the user is creating a new NPC
    handleSubmit = () => {
       let npc
       if (this.props.location.state.editing) {
@@ -41,7 +41,7 @@ class NpcFormContainer extends Component {
       }
       this.props.saveNPC(npc)
    }
-
+   // Listen for form changes that have specific locations in npc object structure
    handleSpecialFormChange = (obj, type) => {
       switch (type) {
          case 'ability':
@@ -68,6 +68,7 @@ class NpcFormContainer extends Component {
             return console.log('Error')
       }
    }
+   // Listen for any deletions of data
    handleFormDelete = (key, type) => {
       const prevState = { ...this.state.npc }
       switch (type) {
@@ -95,7 +96,6 @@ class NpcFormContainer extends Component {
             })
          default:
             delete prevState[key]
-
             return this.setState({
                npc: {
                   ...prevState,

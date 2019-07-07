@@ -1,30 +1,38 @@
-import * as actionTypes from '../constants/actionTypes'
+export const loadedActionTypes = {
+   SAVE_PLAYER: 'SAVE_PLAYER',
+   DELETE_PLAYER: 'DELETE_PLAYER',
+   CLEAR_CAMPAIGN: 'CLEAR_CAMPAIGN',
+   SAVE_ENCOUNTER: 'SAVE_ENCOUNTER',
+   CREATE_ENCOUNTER: 'CREATE_ENCOUNTER',
+   DELETE_ENCOUNTER: 'DELETE_ENCOUNTER',
+}
 
+// TODO: Refactor to action creator
 export const clearCampaign = () => ({
-   type: actionTypes.CLEAR_CAMPAIGN,
+   type: loadedActionTypes.CLEAR_CAMPAIGN,
 })
 
 export const savePlayer = player => ({
-   type: actionTypes.SAVE_PLAYER,
+   type: loadedActionTypes.SAVE_PLAYER,
    player,
 })
 
 export const deletePlayer = id => ({
-   type: actionTypes.DELETE_PLAYER,
+   type: loadedActionTypes.DELETE_PLAYER,
    id,
 })
 
 export const createEncounter = encounter => ({
-   type: actionTypes.CREATE_ENCOUNTER,
+   type: loadedActionTypes.CREATE_ENCOUNTER,
    encounter,
 })
 
 export const deleteEncounter = id => ({
-   type: actionTypes.DELETE_ENCOUNTER,
+   type: loadedActionTypes.DELETE_ENCOUNTER,
    id,
 })
 
 export const saveEncounter = encounter => ({
-   type: actionTypes.SAVE_ENCOUNTER,
+   type: loadedActionTypes.SAVE_ENCOUNTER,
    encounter,
 })

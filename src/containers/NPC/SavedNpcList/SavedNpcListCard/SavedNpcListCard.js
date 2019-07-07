@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { NPC_FORM } from '../../../constants/routes'
-import { slugify } from '../../../utils/utils'
+import { NPC_FORM } from '../../../../constants/routes'
+import { slugify } from '../../../../utils/utils'
 import { ListGroupItem } from 'reactstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
@@ -20,6 +20,7 @@ class SavedNpcListCard extends Component {
                   </span>
                </div>
                <div className="d-flex flex-column justify-content-around">
+               {/* Link to NPC form with the NPC data */}
                   <Link
                   className="text-right"
                      to={{
