@@ -1,4 +1,4 @@
-import * as types from '../constants/actionTypes'
+import { trackerActionTypes } from '../actions/trackerActions'
 
 const initialState = {
    list: [],
@@ -6,16 +6,16 @@ const initialState = {
 }
 export const trackerReducer = (state = initialState, action) => {
    switch (action.type) {
-      case types.LOAD_ENCOUNTER:
-        const loadedEncounter = action.encounter
-        console.log(state.campaign)
+      case trackerActionTypes.LOAD_ENCOUNTER:
+         const loadedEncounter = action.encounter
+         console.log(state.campaign)
          return {
-            ...loadedEncounter
+            ...loadedEncounter,
          }
-         case types.ADD_TO_TRACKER:
+      case trackerActionTypes.ADD_TO_TRACKER:
          return {
             ...state,
-            list : [...action.characters]
+            list: [...action.characters],
          }
       default:
          return state

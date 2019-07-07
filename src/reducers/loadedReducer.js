@@ -1,4 +1,4 @@
-import * as types from '../constants/actionTypes'
+import { loadedActionTypes } from '../actions/loadedActions'
 
 const initial = {
    players: [],
@@ -7,13 +7,13 @@ const initial = {
 
 export const loadedReducer = (state = initial, action) => {
    switch (action.type) {
-      case types.CLEAR_CAMPAIGN:
+      case loadedActionTypes.CLEAR_CAMPAIGN:
          return {}
-      case types.LOAD_CAMPAIGN:
+      case loadedActionTypes.LOAD_CAMPAIGN:
          return {
             ...action.campaign,
          }
-      case types.SAVE_PLAYER:
+      case loadedActionTypes.SAVE_PLAYER:
          let players = state.players.filter(
             player => player.id !== action.player.id
          )
@@ -21,12 +21,12 @@ export const loadedReducer = (state = initial, action) => {
             ...state,
             players: [...players, action.player],
          }
-      case types.DELETE_PLAYER:
+      case loadedActionTypes.DELETE_PLAYER:
          return {
             ...state,
             players: [state.players.filter(player => player.id !== action.id)],
          }
-      case types.SAVE_ENCOUNTER:
+      case loadedActionTypes.SAVE_ENCOUNTER:
          let encounters = state.encounters.filter(
             encounter => encounter.id !== action.encounter.id
          )
@@ -34,7 +34,7 @@ export const loadedReducer = (state = initial, action) => {
             ...state,
             encounters: [...encounters, action.encounter],
          }
-      case types.DELETE_ENCOUNTER:
+      case loadedActionTypes.DELETE_ENCOUNTER:
          return {
             ...state,
             encounters: [
@@ -43,7 +43,7 @@ export const loadedReducer = (state = initial, action) => {
                ),
             ],
          }
-      case types.CREATE_ENCOUNTER:
+      case loadedActionTypes.CREATE_ENCOUNTER:
          return {
             ...state,
             encounters: [...state.encounters, action.encounter],

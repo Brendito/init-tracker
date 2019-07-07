@@ -1,12 +1,16 @@
-import * as types from '../constants/actionTypes'
+export const trackerActionTypes = {
+   ADD_TO_TRACKER: 'ADD_TO_TRACKER',
+   REMOVE_FROM_TRACKER: 'REMOVE_FROM_TRACKER',
+   LOAD_ENCOUNTER: 'LOAD_ENCOUNTER',
+}
 
+// TODO: Refactor to action creator
 export const loadEncounter = encounter => ({
-   type: types.LOAD_ENCOUNTER,
+   type: trackerActionTypes.LOAD_ENCOUNTER,
    encounter,
 })
 
 export const addToTracker = characters => ({
-   type: types.ADD_TO_TRACKER,
-   characters
+   type: trackerActionTypes.ADD_TO_TRACKER,
+   characters,
 })
-
