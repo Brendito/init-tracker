@@ -7,7 +7,6 @@ import NpcContainer from '../containers/NPC/NpcContainer'
 import EncounterBuilder from '../containers/Encounter/EncounterBuilder/EncounterBuilder'
 import PlayerForm from '../containers/Player/PlayerForm/PlayerForm'
 import NpcTemplateList from '../containers/NPC/NpcTemplateList/NpcTemplateList'
-import TrackerContainer from '../containers/Tracker/TrackerContainer'
 
 const router = [
     {
@@ -55,11 +54,6 @@ const router = [
         path: routes.NPC_TEMPLATE_LIST,
         component: NpcTemplateList,
     },
-    {
-        exact: false,
-        path: routes.TRACKER,
-        component: TrackerContainer,
-    }
 ];
 
 
