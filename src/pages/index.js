@@ -1,4 +1,13 @@
-export { default as Campaign } from "./Campaign";
-export { default as LandingPage } from "./LandingPage";
-export { default as PlayerPage } from "./PlayerPage";
-export { default as EncounterPage } from "./EncounterPage";
+import EncounterPage from "./EncounterPage";
+import CampaignPage from "./CampaignPage";
+import PlayerPage from "./PlayerPage";
+import LandingPage from "./LandingPage";
+
+const pages = {
+  EncounterPage,
+  CampaignPage,
+  PlayerPage,
+  LandingPage
+};
+
+export default pages;

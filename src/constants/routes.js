@@ -1,11 +1,27 @@
-export const LANDING_PAGE = "/";
-export const NPC_PAGE = "/campaign/saved-npcs"
-export const NPC_TEMPLATE_LIST = "/campaign/npc-templates"
-export const NPC_FORM = '/campaign/npc-form/'
-export const PLAYER_PAGE = "/campaign/saved-players"
-export const PLAYER_FORM = "/campaign/saved-players/"
-export const ENCOUNTERS_PAGE = "/campaign/saved-encounters"
-export const CAMPAIGN_MANAGER = "/campaign/:campaignName";
-export const CAMPAIGN_BUILDER = "/campaignbuilder";
-export const ENCOUNTER_BUILDER = "/campaign/saved-encounters/"
-export const TRACKER = "/tracker/"
+const landingPage = "/";
+const npcPage = "/campaign/saved-npcs";
+const npcTemplateList = "/campaign/npc-templates";
+const npcForm = "/campaign/npc-form/";
+const playerPage = "/campaign/saved-players";
+const playerForm = "/campaign/saved-players/";
+const encountersPage = "/campaign/saved-encounters";
+const campaignManager = "/campaign/:campaignName";
+const campaignBuilder = "/campaignbuilder";
+const encounterBuilder = "/campaign/saved-encounters/";
+const tracker = "/tracker/";
+
+const routes = {
+  landingPage,
+  npcPage,
+  npcTemplateList,
+  npcForm,
+  playerForm,
+  playerPage,
+  encounterBuilder,
+  encountersPage,
+  campaignBuilder,
+  campaignManager,
+  tracker
+};
+
+export default routes;

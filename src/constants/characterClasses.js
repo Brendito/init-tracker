@@ -1,13 +1,31 @@
-export const BARBARIAN = 'Barbarian'
-export const BARD = 'Bard'
-export const CLERIC = 'Cleric'
-export const DRUID = 'Druid'
-export const FIGHTER = 'Fighter'
-export const MONK = 'Monk'
-export const PALADIN = 'Paladin'
-export const RANGER = 'Ranger'
-export const ROGUE = 'Rogue'
-export const SORCERER = 'Sorcerer'
-export const WARLOCK = 'Warlock'
-export const WIZARD = 'Wizard'
-export const MONSTER = 'Monster'
+const BARBARIAN = "Barbarian";
+const BARD = "Bard";
+const CLERIC = "Cleric";
+const DRUID = "Druid";
+const FIGHTER = "Fighter";
+const MONK = "Monk";
+const PALADIN = "Paladin";
+const RANGER = "Ranger";
+const ROGUE = "Rogue";
+const SORCERER = "Sorcerer";
+const WARLOCK = "Warlock";
+const WIZARD = "Wizard";
+const MONSTER = "Monster";
+
+const characterClasses = {
+  BARBARIAN,
+  BARD,
+  CLERIC,
+  DRUID,
+  FIGHTER,
+  MONK,
+  PALADIN,
+  RANGER,
+  ROGUE,
+  SORCERER,
+  WARLOCK,
+  WIZARD,
+  MONSTER
+};
+
+export default characterClasses;
