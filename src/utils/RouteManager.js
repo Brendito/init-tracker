@@ -1,60 +1,61 @@
 import * as React from "react";
+
 import { Route, Switch } from "react-router-dom";
 
-import routes from "../constants/routes";
 import EncounterBuilder from "../containers/Encounter/EncounterBuilder";
 import NpcContainer from "../containers/NPC";
 import NpcFormContainer from "../containers/NPC/NpcFormContainer";
 import NpcTemplateList from "../containers/NPC/NpcTemplateList";
 import PlayerForm from "../containers/Player/PlayerForm/PlayerForm";
 import pages from "../pages";
+import routes from "../constants/routes";
 
 const router = [
   {
     exact: true,
     path: routes.landingPage,
-    component: pages.LandingPage
+    component: pages.LandingPage,
   },
   {
     exact: false,
     path: routes.campaignBuilder,
-    component: pages.Campaign
+    component: pages.CampaignPage,
   },
   {
     exact: false,
     path: routes.npcPage,
-    component: NpcContainer
+    component: NpcContainer,
   },
   {
     exact: false,
     path: routes.npcForm,
-    component: NpcFormContainer
+    component: NpcFormContainer,
   },
   {
     exact: true,
     path: routes.playerPage,
-    component: pages.PlayerPage
+    component: pages.PlayerPage,
   },
   {
     exact: false,
     path: routes.playerForm,
-    component: PlayerForm
+    component: PlayerForm,
   },
   {
     exact: true,
     path: routes.encountersPage,
-    component: pages.EncounterPage
+    component: pages.EncounterPage,
   },
   {
     exact: false,
     path: routes.encounterBuilder,
-    component: EncounterBuilder
+    component: EncounterBuilder,
   },
   {
     exact: false,
     path: routes.npcTemplateList,
-    component: NpcTemplateList
-  }
+    component: NpcTemplateList,
+  },
 ];
 
 const RouteManager = () => {

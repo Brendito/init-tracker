@@ -1,5 +1,7 @@
 /* eslint-disable no-useless-escape */
-import { modifiers, Modifiers } from "../constants/npcInformation";
+
+import { Modifiers, modifiers } from "../constants/npcInformation";
+
 import { Npc } from "../models";
 
 export function slugify(string: string) {
@@ -11,7 +13,7 @@ export function slugify(string: string) {
     .toString()
     .toLowerCase()
     .replace(/\s+/g, "-") // Replace spaces with -
-    .replace(p, c => b.charAt(a.indexOf(c))) // Replace special characters
+    .replace(p, (c) => b.charAt(a.indexOf(c))) // Replace special characters
     .replace(/&/g, "-and-") // Replace & with 'and'
     .replace(/[^\w\-]+/g, "") // Remove all non-word characters
     .replace(/\-\-+/g, "-") // Replace multiple - with single -
@@ -49,7 +51,7 @@ export function sortByName(array: Array<any>) {
 export function sentenceCase(str: string) {
   const lower = str.toLowerCase().split(" ");
   for (var i = 0; i < lower.length; i++) {
-    lower[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1);
+    if (str[i]) lower[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1);
   }
   return lower.join(" ");
 }
@@ -58,7 +60,7 @@ export function getModifier(value: any) {
   if (value >= 30) return "+10";
   if (value <= 0) return "-5";
   const num = modifiers.find(
-    npc => Number(npc.value) === Number(value)
+    (npc) => Number(npc.value) === Number(value)
   ) as Modifiers;
 
   if (num.mod >= 0) {

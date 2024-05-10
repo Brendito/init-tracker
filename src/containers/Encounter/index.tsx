@@ -1,13 +1,13 @@
-import { v4 } from "node-uuid";
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Button, Container, Input, Label, Modal } from "reactstrap";
-import { bindActionCreators } from "redux";
-
-import { loadedActionCreators, LoadedActionCreators } from "../../actions";
-import EncounterList from "./EncounterList";
-
 import "./styles.css";
+
+import { Button, Container, Input, Label, Modal } from "reactstrap";
+import { LoadedActionCreators, loadedActionCreators } from "../../actions";
+import React, { Component } from "react";
+
+import EncounterList from "./EncounterList";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import { v4 } from "node-uuid";
 
 interface Props {
   loadedActions: LoadedActionCreators;

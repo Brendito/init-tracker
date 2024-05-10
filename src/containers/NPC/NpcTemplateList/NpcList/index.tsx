@@ -1,21 +1,21 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { NavLink } from "react-router-dom";
-import withSizes from "react-sizes";
-import { Button, ListGroup, ListGroupItem, Modal } from "reactstrap";
-import { compose } from "redux";
+import "./styles.css";
 
-import npcData from "../../../../assets/data/npcData";
-import ListFilter from "../../../../components/ListFilter";
-import StatBlock from "../../../../components/StatBlock";
-import routes from "../../../../constants/routes";
-import { mapSizesToProps } from "../../../../hoc/screenSizes";
+import { Button, ListGroup, ListGroupItem, Modal } from "reactstrap";
 import { Npc, State } from "../../../../models";
+import React, { Component } from "react";
 import { slugify, titleCase } from "../../../../utils/utils";
 
-import "./styles.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import ListFilter from "../../../../components/ListFilter";
+import { NavLink } from "react-router-dom";
+import StatBlock from "../../../../components/StatBlock";
+import { compose } from "redux";
+import { connect } from "react-redux";
 import { initialStates } from "../../../../constants/initialStates";
+import { mapSizesToProps } from "../../../../hoc/screenSizes";
+import npcData from "../../../../assets/data/npcData";
+import routes from "../../../../constants/routes";
+import withSizes from "react-sizes";
 
 let templates = npcData;
 
@@ -43,7 +43,7 @@ class NpcList extends Component<Props> {
 
   componentDidMount = () => {
     const allNpcs = [...this.props.npcs, ...templates];
-    allNpcs.sort(function(a, b) {
+    allNpcs.sort(function (a, b) {
       if (a.name.toLowerCase() < b.name.toLowerCase()) {
         return -1;
       }
@@ -69,8 +69,7 @@ class NpcList extends Component<Props> {
     }
   };
 
-  handleViewNpc = (e: React.ChangeEvent<any>) => {
-    const id = e.target.dataset.id;
+  handleViewNpc = (id: string) => {
     const copiedNpc = [...this.state.npcs].find((npc: Npc) => {
       return String(npc.id) === String(id);
     });
@@ -109,6 +108,7 @@ class NpcList extends Component<Props> {
           {this.state.filteredList &&
             this.state.filteredList.length > 0 &&
             this.state.filteredList.map((npc: Npc, i) => {
+              if (!npc) return null
               return (
                 <ListGroupItem className="my-1" key={i}>
                   <div className="d-flex justify-content-between">
@@ -129,8 +129,7 @@ class NpcList extends Component<Props> {
                           state: {
                             npc: {
                               ...npc,
-                              characterType: this.props.location.state
-                                .characterType
+                              characterType: this.props.location.state.characterType
                             }
                           }
                         }}
@@ -148,12 +147,12 @@ class NpcList extends Component<Props> {
                       <div className="d-flex justify-content-end align-items-center">
                         <span
                           data-id={npc.id}
-                          onClick={this.handleViewNpc}
+                          onClick={() => this.handleViewNpc(npc.id)}
                           className="font-weight-lighter cardtext cursor-pointer"
                         >
                           Preview
                         </span>
-                        <span data-id={npc.id} onClick={this.handleViewNpc}>
+                        <span data-id={npc.id} onClick={() => this.handleViewNpc(npc.id)}>
                           <FontAwesomeIcon
                             icon="search"
                             className="ml-1 mt-1 cursor-pointer"
